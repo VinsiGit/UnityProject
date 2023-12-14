@@ -1,30 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float mouseSensitivity = 2.0f;
+    [Header("Movement")]
+    public float moveSpeed;
+    public float maxSpeed = 50f;
     public Transform playerCamera;
+    public float groundDrag;
+    public float mouseSensitivity = 2.0f;
+    public float jumpForce;
+    public float jumpCooldown;
+    public float airMultiplier;
+    public KeyCode jumpKey = KeyCode.Space;
+    public float playerHeight;
+    public LayerMask whatIsGround;
 
-    private float xRotation = 0.0f;
+    private bool readyToJump = true;
+    private bool grounded;
+    private float xRotation;
+    private Rigidbody rb;
 
-    void Start()
+    private void Start()
     {
-        // Lock the cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
-    void Update()
+
+    private void Update()
     {
-        // Player movement
-        float x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        float z = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        HandleInput();
+        HandleDrag();
+        HandleRotation();
+        MovePlayer();
 
-        transform.Translate(x, 0, z);
+    }
 
-        // Mouse look
+    private void FixedUpdate()
+    {
+    }
+
+    private void HandleInput()
+    {
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
+    }
+
+    private void HandleDrag()
+    {
+        rb.drag = grounded ? groundDrag : 0;
+    }
+
+    private void HandleRotation()
+    {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
@@ -32,7 +65,62 @@ public class Movement : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
         transform.Rotate(Vector3.up * mouseX);
+
+    }
+
+    private void MovePlayer()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Get the forward direction of the camera
+        // Vector3 forward = playerCamera.transform.forward;
+        // // Remove any Y-axis movement
+        // forward.y = 0;
+        // forward.Normalize();
+        Vector3 inputVector = new Vector3(horizontalInput, 0f, verticalInput);
+
+        // Get the right direction of the camera
+        // Vector3 right = playerCamera.transform.right;
+
+        // Vector3 velocity = rb.velocity;
+        Vector3 force = playerCamera.transform.TransformDirection(inputVector);
+        force.y = 0f; // set y component to 0
+        force *= moveSpeed * 60 * Time.deltaTime;
+
+        rb.AddForce(force, ForceMode.Acceleration); //* (grounded ? 1 : airMultiplier)
+
+        // This is the desired move direction
+        // Vector3 desiredMoveDirection = forward * verticalInput + right * horizontalInput;
+
+        // rb.AddForce(desiredMoveDirection.normalized * moveSpeed * Time.deltaTime * 10f * (grounded ? 1 : airMultiplier), ForceMode.Force);
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
+        // LimitVelocity();
+    }
+
+    private void LimitVelocity()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void ResetJump()
+    {
+        readyToJump = true;
     }
 }
