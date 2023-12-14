@@ -693,8 +693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3066df8f31577147a7cbf5eefd23a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 0}
-  numberOfObjects: 30
+  objectToPlace: {fileID: 386799231}
+  numberOfObjects: 900
 --- !u!1 &1345210009
 GameObject:
   m_ObjectHideFlags: 0
