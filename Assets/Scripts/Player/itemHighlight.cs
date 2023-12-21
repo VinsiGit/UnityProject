@@ -74,9 +74,9 @@ public class itemHighlight : MonoBehaviour
             {
                 HighlightObject(hitObject, pickUpHighlightMat);
             }
-            else if (hitObject.tag == "Container")
+            else if (hitObject.tag == "Container") // also add check with playermanager if player is carrying
             {
-
+                HighlightObject(hitObject, storeHighlightMat);
             }
             else
             {

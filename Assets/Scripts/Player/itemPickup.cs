@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class itemPickup : MonoBehaviour
 {
-    public TextMeshProUGUI scoreDisplay; // direct reference to textmesh -> change to inventory attribute of playermanager
+    public PlayerManager playerManager;
     public TextMeshProUGUI interactionText;
     public itemHighlight highlightscript;
 
@@ -24,8 +24,6 @@ public class itemPickup : MonoBehaviour
 
         // Destroy the object
         Destroy(gameObject);
-
-        scoreDisplay.text = "test success";
 
         ShowHeldItem(gameObject);
 
@@ -61,13 +59,15 @@ public class itemPickup : MonoBehaviour
         }
     }
 
-    void DropItem()
+    void StoreItem()
     {
         // Check if the player is holding an item
         if (heldItem != null)
         {
             // Destroy the held item
             Destroy(heldItem);
+
+            playerManager.addScore(1);
 
             // reactivate bat
             Transform playerCamera = transform.Find("Main Camera");
@@ -100,11 +100,13 @@ public class itemPickup : MonoBehaviour
                     PickupObject(hitObject);
                 }
             }
-        }
-
-        if (Input.GetKey(KeyCode.G))
-        {
-            DropItem();
+            else if (hitObject.tag == "Container")
+            {
+                if ((Input.GetKey(KeyCode.E)) && (isHolding == true))
+                {
+                    StoreItem();
+                }
+            }
         }
     }
 
