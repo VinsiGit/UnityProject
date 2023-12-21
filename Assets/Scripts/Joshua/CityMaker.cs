@@ -9,9 +9,11 @@ public class CityMaker : MonoBehaviour
     public GameObject roadPrefab;
     public GameObject intersectionPrefab;
     public GameObject playerPrefab;
+    public GameObject containerPrefab;
+    public Material wallMaterial;
     public GameObject pickupPrefab;
-
     public int numberOfPickups = 5;
+
     public GameObject enemyPrefab;
     public int numberOfEnemies = 5;
 
@@ -20,6 +22,13 @@ public class CityMaker : MonoBehaviour
     public int cityLength = 10;
     public int roadFrequencyX = 5; // Frequency of roads in the X direction
     public int roadFrequencyZ = 5; // Frequency of roads in the Z direction
+
+    public float minimapCameraHeightMultiplier = 1.5f; // Add this line at the top of your class
+
+    public Rect minimapViewportRect = new Rect(0.75f, 0.75f, 0.2f, 0.2f); // Adjust this as needed
+    private GameObject player; // Assign this in the Unity editor
+
+
     private List<Vector3> roadPositions = new List<Vector3>();
     private bool[,] roadPositionsBool;
     void Start()
@@ -31,8 +40,20 @@ public class CityMaker : MonoBehaviour
         GeneratePlayer();
         GenerateEnemies();
         GeneratePickups();
-    }
+        GenerateWalls();
 
+        GenerateMinimapCamera(); // Add this line
+
+    }
+    void Update()
+    {
+        // Update the minimap camera's position
+        Vector3 playerPosition = player.transform.position;
+        float cameraHeight = Mathf.Max(cityWidth, cityLength) * minimapCameraHeightMultiplier;
+        Camera minimapCamera = GameObject.Find("MinimapCamera").GetComponent<Camera>();
+        minimapCamera.transform.position = new Vector3(playerPosition.x, cameraHeight, playerPosition.z);
+        minimapCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
+    }
     void GenerateCity()
     {
         GenerateRoads();
@@ -148,15 +169,11 @@ public class CityMaker : MonoBehaviour
         {
 
             Vector3 playerPosition = roadPositions[Random.Range(0, roadPositions.Count)];
-            GameObject player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
-            player.tag = "Player";
+            player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
 
             Vector3 cubePosition = playerPosition + new Vector3(1, 0.5f, 1); // Adjust this offset as needed
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.transform.position = cubePosition;
+            GameObject cube = Instantiate(containerPrefab, cubePosition, Quaternion.identity);
             cube.transform.localScale = new Vector3(2, 1, 1); // Adjust this as needed
-
-            cube.tag = "Container";
         }
     }
     void GenerateEnemies()
@@ -186,6 +203,46 @@ public class CityMaker : MonoBehaviour
                 Instantiate(pickupPrefab, pickupPosition, Quaternion.identity);
             }
         }
+    }
+
+    void GenerateWalls()
+    {
+        int size = 50;
+        int cityWidthNew = cityWidth * 10;
+        int cityLengthNew = cityLength * 10;
+        int startX = -5;
+        int startZ = -5;
+        // Create the four walls
+        CreateWall(new Vector3(startX, size / 2, startZ + cityLengthNew / 2), new Vector3(1, size, cityLengthNew));
+        CreateWall(new Vector3(startX + cityWidthNew, size / 2, startZ + cityLengthNew / 2), new Vector3(1, size, cityLengthNew));
+        CreateWall(new Vector3(startX + cityWidthNew / 2, size / 2, startZ), new Vector3(cityWidthNew, size, 1));
+        CreateWall(new Vector3(startX + cityWidthNew / 2, size / 2, startZ + cityLengthNew), new Vector3(cityWidthNew, size, 1));
+    }
+
+    void CreateWall(Vector3 position, Vector3 scale)
+    {
+        GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        wall.transform.position = position;
+        wall.transform.localScale = scale;
+        wall.GetComponent<Renderer>().material = wallMaterial;
+    }
+
+    void GenerateMinimapCamera()
+    {
+        // Create a new camera for the minimap
+        GameObject minimapCameraObject = new GameObject("MinimapCamera");
+        Camera minimapCamera = minimapCameraObject.AddComponent<Camera>();
+
+        // Set the camera's viewport rect to make the minimap smaller
+        minimapCamera.rect = minimapViewportRect;
+
+        // Set the camera's projection to orthographic and adjust its size
+        minimapCamera.orthographic = true;
+        minimapCamera.orthographicSize = Mathf.Max(cityWidth, cityLength) / 2;
+
+
+        // Make the minimap camera a child of the player
+        minimapCameraObject.transform.SetParent(player.transform);
     }
 }
 
