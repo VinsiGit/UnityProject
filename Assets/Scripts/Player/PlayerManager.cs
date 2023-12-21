@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class managert : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public TextMeshProUGUI scoreDisplay; // direct reference to textmesh -> change to inventory attribute of playermanager
+
+    private int score = 0;
+
     void Start()
     {
         
@@ -13,6 +17,11 @@ public class managert : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        scoreDisplay.text = $"Score: {score}";
+    }
+
+    public void addScore(int amount)
+    {
+        score += amount;
     }
 }
