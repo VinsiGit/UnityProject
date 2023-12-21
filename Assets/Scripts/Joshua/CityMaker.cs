@@ -9,7 +9,9 @@ public class CityMaker : MonoBehaviour
     public GameObject roadPrefab;
     public GameObject intersectionPrefab;
     public GameObject playerPrefab;
+    public GameObject pickupPrefab;
 
+    public int numberOfPickups = 5;
     public GameObject enemyPrefab;
     public int numberOfEnemies = 5;
 
@@ -19,15 +21,16 @@ public class CityMaker : MonoBehaviour
     public int roadFrequencyX = 5; // Frequency of roads in the X direction
     public int roadFrequencyZ = 5; // Frequency of roads in the Z direction
     private List<Vector3> roadPositions = new List<Vector3>();
-    private bool[,] roadPositionsBool = new bool[10, 10];
-
+    private bool[,] roadPositionsBool;
     void Start()
     {
+        roadPositionsBool = new bool[cityWidth, cityLength];
 
         GenerateCity();
 
         GeneratePlayer();
         GenerateEnemies();
+        GeneratePickups();
     }
 
     void GenerateCity()
@@ -89,6 +92,7 @@ public class CityMaker : MonoBehaviour
                 {
                     // Open space (park, plaza, etc.)
                     Instantiate(openSpacePrefab, position, Quaternion.identity);
+                    roadPositions.Add(position);
                 }
                 else
                 {
@@ -130,11 +134,7 @@ public class CityMaker : MonoBehaviour
             // Ensure the new position is within the city bounds
             if (newX >= 0 && newX < cityWidth && newZ >= 0 && newZ < cityLength && roadPositionsBool[newX, newZ])
             {
-                Debug.LogFormat("Road found at position: ({0}, {1})", newX, newZ);
-                Debug.LogFormat("Current building position: ({0}, {1})", x, z);
-                Debug.LogFormat("Direction from building to road: {0}", direction);
                 adjacentRoads.Add(direction);
-
             }
         }
 
@@ -150,6 +150,13 @@ public class CityMaker : MonoBehaviour
             Vector3 playerPosition = roadPositions[Random.Range(0, roadPositions.Count)];
             GameObject player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
             player.tag = "Player";
+
+            Vector3 cubePosition = playerPosition + new Vector3(1, 0.5f, 1); // Adjust this offset as needed
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.transform.position = cubePosition;
+            cube.transform.localScale = new Vector3(2, 1, 1); // Adjust this as needed
+
+            cube.tag = "Container";
         }
     }
     void GenerateEnemies()
@@ -160,6 +167,23 @@ public class CityMaker : MonoBehaviour
             {
                 Vector3 enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
                 Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
+            }
+        }
+    }
+
+    void GeneratePickups()
+    {
+        for (int i = 0; i < numberOfPickups; i++)
+        {
+            if (roadPositions.Count > 0)
+            {
+                Vector3 pickupPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+
+                float offsetX = Random.Range(-5f, 5f);
+                float offsetZ = Random.Range(-5f, 5f);
+                pickupPosition += new Vector3(offsetX, 0.5f, offsetZ);
+
+                Instantiate(pickupPrefab, pickupPosition, Quaternion.identity);
             }
         }
     }
