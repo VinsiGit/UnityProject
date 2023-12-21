@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class itemHighlight : MonoBehaviour
 {
-    public Material highlightMat;
+    public Material pickUpHighlightMat;
+    public Material storeHighlightMat;
     public TextMeshProUGUI interactionText; // Reference to TextMeshProUGUI component
 
     Material[] originalMaterials;
@@ -27,7 +28,7 @@ public class itemHighlight : MonoBehaviour
         }
     }
 
-    void HighlightObject(GameObject gameObject)
+    void HighlightObject(GameObject gameObject, Material highLightMat)
     {
         if (prevHighlight != gameObject)
         {
@@ -43,7 +44,7 @@ public class itemHighlight : MonoBehaviour
                 newMaterials[i] = originalMaterials[i];
             }
 
-            newMaterials[newMaterials.Length - 1] = highlightMat;
+            newMaterials[newMaterials.Length - 1] = highLightMat;
 
             // Apply the new materials array
             gameObject.GetComponent<Renderer>().materials = newMaterials;
@@ -71,7 +72,11 @@ public class itemHighlight : MonoBehaviour
             GameObject hitObject = rayHit.collider.gameObject;
             if (hitObject.tag == "Item")
             {
-                HighlightObject(hitObject);
+                HighlightObject(hitObject, pickUpHighlightMat);
+            }
+            else if (hitObject.tag == "Container")
+            {
+
             }
             else
             {
