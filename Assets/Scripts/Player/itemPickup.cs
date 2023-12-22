@@ -54,7 +54,7 @@ public class itemPickup : MonoBehaviour
             // add to camera
             heldItem.transform.parent = playerCamera;
             // change held item relative position
-            heldItem.transform.localRotation = new Quaternion(0, 0, 0, 0);
+            heldItem.transform.localRotation = Quaternion.Euler(10, 0, 0);
             heldItem.transform.localPosition = new Vector3(0.15f, -1.2f, 1);
         }
     }
