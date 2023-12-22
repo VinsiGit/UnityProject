@@ -674,6 +674,7 @@ GameObject:
   - component: {fileID: 7412020651057671751}
   - component: {fileID: 357974862715319659}
   - component: {fileID: 3655280664924630691}
+  - component: {fileID: 6774583736799998003}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -740,7 +741,7 @@ MonoBehaviour:
   sprintSpeed: 6
   jumpSpeed: 3
   gravity: 10
-  mouseSensitivity: 100
+  mouseSensitivity: 200
   playerCamera: {fileID: 5425146254157744314}
 --- !u!114 &357974862715319659
 MonoBehaviour:
@@ -769,9 +770,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68bc86cfbbaf1547be7ac45fb2b540e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreDisplay: {fileID: 3282456330008537908}
+  playerManager: {fileID: 6774583736799998003}
   interactionText: {fileID: 8391888198918424169}
   highlightscript: {fileID: 357974862715319659}
+--- !u!114 &6774583736799998003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542192911900621936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c4b8fe6b4b06d41b9b9001dcd4f52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreDisplay: {fileID: 3282456330008537908}
 --- !u!1 &8755650951025317748
 GameObject:
   m_ObjectHideFlags: 0
