@@ -2,20 +2,27 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MacMobileGrass12
   m_Shader: {fileID: 4800000, guid: 633f3942dd21bc74e8ced79f61bff941, type: 3}
-  m_ShaderKeywords: USE_RT _RTEFFECT_ON
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - USE_RT
+  - USE_S
+  m_InvalidKeywords:
+  - _RTEFFECT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -79,6 +86,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -101,6 +109,8 @@ Material:
     - _OcclusionStrength: 1
     - _OffsetValue: 2.5
     - _Parallax: 0.02
+    - _ProceduralDistance: 5.5
+    - _ProceduralStrength: 1.5
     - _RTEffect: 1
     - _RimMax: 0.62
     - _RimMin: 0.241
@@ -114,11 +124,19 @@ Material:
     - _TilingN2: 0.05
     - _TilingN3: 0.5
     - _UVSec: 0
+    - _UseAmbientLight: 0
+    - _UsePR: 0
     - _UseRT: 1
     - _UseShadow: 1
     - _UseShadowCast: 0
+    - _UseTP: 0
+    - _UseVP: 0
+    - _UseVR: 0
+    - _UseWC: 0
     - _WindForce: 0.2
     - _WindMovement: 0.3
+    - _WorldRotation: 0
+    - _WorldScale: 10
     - _ZWrite: 1
     - __NumberOfStacks: 17
     m_Colors:
@@ -130,3 +148,4 @@ Material:
     - _ProjectedShadowColor: {r: 0.4528302, g: 0.42296267, b: 0.044855822, a: 1}
     - _RimColor: {r: 0.14566667, g: 0.184, b: 0.09008333, a: 1}
     - _SelfShadowColor: {r: 0.56, g: 0.5136552, b: 0.24717242, a: 1}
+  m_BuildTextureStacks: []
