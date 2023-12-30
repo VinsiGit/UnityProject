@@ -10,6 +10,11 @@ public class itemPickup : MonoBehaviour
     public TextMeshProUGUI interactionText;
     public itemHighlight highlightscript;
 
+    public float offset_x = 0;
+    public float offset_y = -1.2f;
+    public float offset_z = 1;
+    public float tilt = 10;
+
     private GameObject heldItem; // Reference to the currently held item
     private bool isHolding = false; // Flag to determine if the player can pick up more items -> add to player manager
 
@@ -54,8 +59,8 @@ public class itemPickup : MonoBehaviour
             // add to camera
             heldItem.transform.parent = playerCamera;
             // change held item relative position
-            heldItem.transform.localRotation = Quaternion.Euler(10, 0, 0);
-            heldItem.transform.localPosition = new Vector3(0.15f, -1.2f, 1);
+            heldItem.transform.localRotation = Quaternion.Euler(tilt, 0, 0);
+            heldItem.transform.localPosition = new Vector3(offset_x, offset_y, offset_z);
         }
     }
 

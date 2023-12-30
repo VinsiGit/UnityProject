@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class batSwingOnClick : MonoBehaviour
+public class weaponSwingOnClick : MonoBehaviour
 {
     Animator anim;
 
