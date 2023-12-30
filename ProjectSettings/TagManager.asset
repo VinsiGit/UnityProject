@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Item
+  - Container
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - outlined objects
   - Water
   - UI
   - 

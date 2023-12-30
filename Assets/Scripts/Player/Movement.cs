@@ -4,35 +4,46 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float mouseSensitivity = 2.0f;
+    public float speed = 3.0f;
+    public float sprintSpeed = 6.0f; // Add this line
+    public float jumpSpeed = 8.0f;
+    public float gravity = 10.0f;
+    public float mouseSensitivity = 100.0f;
     public Transform playerCamera;
 
-    private float xRotation = 0.0f;
+    private Vector3 moveDirection = Vector3.zero;
+    private CharacterController controller;
+    private float yRotation = 0.0f;
 
     void Start()
     {
-        // Lock the cursor
+        controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
+
     void Update()
     {
-        // Player movement
-        float x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        float z = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        transform.Translate(x, 0, z);
+        yRotation -= mouseY;
+        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
-        // Mouse look
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        playerCamera.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX); // Rotate the parent object
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : speed; // Modify this line
 
-        playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpSpeed;
+        }
 
-        transform.Rotate(Vector3.up * mouseX);
+        moveDirection.y -= gravity * Time.deltaTime;
+
+        controller.Move(moveDirection * Time.deltaTime);
     }
 }
