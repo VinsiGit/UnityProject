@@ -1,12 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Materials/Nicolai/Doors.mat.meta
-guid: ce866ec93c07b474bbf26386caab8943
-========
-guid: aa5822985db5b5f4e9dcced4a35fec0b
->>>>>>>> origin/main:Assets/Materials/minimap/player.mat.meta
+guid: 91e308ef63d3f70499813b5ae7b856ab
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
