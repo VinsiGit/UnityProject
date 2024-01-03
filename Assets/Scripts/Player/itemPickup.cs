@@ -7,7 +7,7 @@ using UnityEngine;
 public class itemPickup : MonoBehaviour
 {
     public PlayerManager playerManager;
-    public TextMeshProUGUI interactionText;
+    public UIManager UiManager;
     public itemHighlight highlightscript;
 
     public float offset_x = 0;
@@ -35,7 +35,7 @@ public class itemPickup : MonoBehaviour
         // Disable pickups when holding shit
         isHolding = true;
 
-        interactionText.gameObject.SetActive(false);
+        UiManager.InteractionTextActive(false);
     }
 
     void ShowHeldItem(GameObject gameObject)
