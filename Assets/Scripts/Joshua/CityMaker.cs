@@ -196,11 +196,14 @@ public class CityMaker : MonoBehaviour
             {
                 Vector3 pickupPosition = roadPositions[Random.Range(0, roadPositions.Count)];
 
-                float offsetX = Random.Range(-5f, 5f);
-                float offsetZ = Random.Range(-5f, 5f);
-                pickupPosition += new Vector3(offsetX, 0.5f, offsetZ);
+                float offsetX = Random.Range(-4f, 4f);
+                float offsetZ = Random.Range(-4f, 4f);
+                pickupPosition += new Vector3(offsetX, 0.7f, offsetZ);
 
-                Instantiate(pickupPrefab, pickupPosition, Quaternion.identity);
+                float randomYRotation = Random.Range(0f, 360f);
+                Quaternion pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
+
+                Instantiate(pickupPrefab, pickupPosition, pickupRotation);
             }
         }
     }
