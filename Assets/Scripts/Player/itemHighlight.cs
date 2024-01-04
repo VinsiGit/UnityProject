@@ -7,14 +7,14 @@ public class itemHighlight : MonoBehaviour
 {
     public Material pickUpHighlightMat;
     public Material storeHighlightMat;
-    public TextMeshProUGUI interactionText; // Reference to TextMeshProUGUI component
+    public UIManager UiManager;
 
     Material[] originalMaterials;
     GameObject prevHighlight;
 
     public void ClearHighlighted()
     {
-        interactionText.gameObject.SetActive(false);
+        UiManager.InteractionTextActive(false);
         // Clear material from the last looked at material
         if (prevHighlight != null)
         {
@@ -52,7 +52,7 @@ public class itemHighlight : MonoBehaviour
             prevHighlight = gameObject;
 
             // Show the interaction text
-            interactionText.gameObject.SetActive(true);
+            UiManager.InteractionTextActive(true, "e");
         }
     }
 
