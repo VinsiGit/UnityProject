@@ -1,0 +1,19 @@
+eerst gewoon: 'jij bent vuilkarman, raap vuil op'
+
+boven bewaker staat groot wit lichtgevend uitroepteken
+
+praat met de bewaker door 'e' te drukken (talk to factory guard: [E])
+
+'hey ik zie dat je afval aan het opruimen bent, onze fabriek zit vol met afval, kun je ons helpen?'
+
+'het is wel gevaarlijk om te lang in de fabriek te blijven, bus om te bewijzen dat je snel genoeg bent, krijg je 5 minuten om mij 10 vuilniszakken te leveren'
+
+als er minder dan 150 zkken over zijn, worden er 20 nieuwe zakken gespawned
+
+komt nieuwe text op scherm: 'objective: collect 10 bags within 5 minutes'
+
+onder timer x/10
+
+als je te traag bent zegt de bewaker 'jammer, maar dat was te traag om veilig de fabriek leeg te kunnen maken, kom terug wanneer je het wel denkt te kunnen'
+
+als je alle 10 zakken binnen de tijd weet te verzamelen, gaat het gaas voor de fabriek open en mag je binnen door 'e' te drukken op de deur (enter factory: [E])

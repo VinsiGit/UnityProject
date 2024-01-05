@@ -6,11 +6,12 @@ public class gameTimer : MonoBehaviour
 {
     public UIManager UiManager;
     public bool showPercentage = false;
+    public bool timerComplete = false;
 
-    private int totalTime = 60;
-    private float timer = 60f;
-    private bool isTimerRunning = true;
-    private string tooltext = "test";
+    private int totalTime;
+    private float timer;
+    private bool isTimerRunning = false;
+    private string tooltext;
 
     void Update()
     {
@@ -50,8 +51,15 @@ public class gameTimer : MonoBehaviour
                 // Stop the timer when it reaches 0
                 isTimerRunning = false;
                 UiManager.TimerDisplayActive(false);
+                timerComplete = true;
             }
         }
+    }
+
+    public void StopTimer()
+    {
+        isTimerRunning = false;
+        UiManager.TimerDisplayActive(false);
     }
 
     // Function to start the timer
