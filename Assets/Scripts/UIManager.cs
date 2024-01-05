@@ -9,11 +9,20 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timerDisplay;
     public TextMeshProUGUI progressDisplay;
     public TextMeshProUGUI goalDisplay;
+    public TextMeshProUGUI dialogueWindow; // New TextMeshProUGUI for dialogue
+
+    private float dialogueDisplayTime;
+    private float dialogueTypingDelay = 0.1f; // Typing speed for interaction text
+    private Coroutine dialogueCoroutine; // Coroutine reference for interaction text
 
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize interactionTextCoroutine
+        dialogueCoroutine = null;
 
+        // Call the method to display the initial dialogue
+        TypeDialogue("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto", 100f);
     }
 
     // Update is called once per frame
@@ -22,9 +31,54 @@ public class UIManager : MonoBehaviour
 
     }
 
+    // Public method to call interaction text from the outside
+    public void TypeDialogue(string text, float displayTime)
+    {
+        if (dialogueCoroutine != null)
+        {
+            // Stop the existing coroutine if it's running
+            StopCoroutine(dialogueCoroutine);
+        }
+
+        // Use coroutine for interaction text with typewriter effect
+        dialogueCoroutine = StartCoroutine(TypeDialogueCoroutine(text));
+
+        // Set the display time to the provided value or use the default
+        dialogueDisplayTime = displayTime;
+
+        // Activate the interaction text
+        dialogueWindow.gameObject.SetActive(true);
+    }
+
+    private IEnumerator TypeDialogueCoroutine(string textToWrite)
+    {
+        dialogueWindow.text = ""; // Ensure the text is initially empty
+
+        int characterIndex = 0;
+
+        while (characterIndex < textToWrite.Length)
+        {
+            // Append one character to the dialogue window
+            dialogueWindow.text += textToWrite[characterIndex];
+            characterIndex++;
+
+            // Wait for the specified time before typing the next character
+            yield return new WaitForSeconds(dialogueTypingDelay);
+        }
+
+        // Wait for the specified display time before clearing the text
+        yield return new WaitForSeconds(dialogueTypingDelay);
+
+        // Clear the dialogue window after the display time
+        dialogueWindow.text = "";
+
+        // Deactivate the dialogue window
+        dialogueWindow.gameObject.SetActive(false);
+    }
+
     public void InteractionTextActive(bool active, string text = "")
     {
-        if (text != "")
+        if(text != "")
         {
             interactionText.text = $"{text}: [e]";
         }
@@ -32,7 +86,7 @@ public class UIManager : MonoBehaviour
         {
             interactionText.text = $"[e]";
         }
-
+        
         interactionText.gameObject.SetActive(active);
     }
 

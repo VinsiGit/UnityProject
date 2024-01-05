@@ -33,7 +33,7 @@ public class gameTimer : MonoBehaviour
                     if (Mathf.Floor(percentage) < Mathf.Floor((timer + Time.deltaTime) / totalTime * 100f))
                     {
                         // Log the remaining time in percentage
-                        UiManager.UpdateTimer(tooltext, $"{100-percentage}%");
+                        UiManager.UpdateTimer(tooltext, $"{100 - percentage}%");
                     }
                 }
                 else
