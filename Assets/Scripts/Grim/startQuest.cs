@@ -11,6 +11,7 @@ public class startQuest : MonoBehaviour
     public gameTimer timerScript;
     public PlayerManager playerManager;
     public UIManager UiManager;
+    public Animator factoryOpen;
     
     public int timeInSeconds = 300;
     public int itemAmount = 10;
@@ -76,7 +77,7 @@ public class startQuest : MonoBehaviour
         questActive = true;
         firstInteraction = false;
 
-        UiManager.DisplayQuestInfo("collect 10 trash bags", $"0/{itemAmount}");
+        UiManager.DisplayQuestInfo($"collect {itemAmount} trash bags", $"0/{itemAmount}");
 
         timerScript.StartTimer(seconds, "time left");
     }
@@ -98,9 +99,10 @@ public class startQuest : MonoBehaviour
 
         if(questActive == true)
         {
+            UiManager.UpdateQuestProgress($"{playerManager.score - initialScore}/{itemAmount}");
             if (timerScript.timerComplete == true)
             {
-                //quest gefaald
+                //quest failed
                 Debug.Log("quest failed");
                 //manneke zegt da ge altijd opnieuw moogt proberen, en je mag terugkomen wanneer er dankt klaar voor te zijn
                 timerScript.timerComplete = false; //reset timerend not to introduce bugs or something
@@ -108,12 +110,12 @@ public class startQuest : MonoBehaviour
             }
             else if ((playerManager.score - initialScore) == itemAmount)
             {
-                //quest geslaagd
+                //quest complete
                 Debug.Log("quest success");
                 //display dat quest gelukt is
                 //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
 
-                //poort gaat open
+                factoryOpen.SetTrigger("quest complete");
                 StopQuest();
             }
         }
