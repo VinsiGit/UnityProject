@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreDisplay; // direct reference to textmesh -> change to inventory attribute of playermanager
 
-    private int score = 0;
+    public int score = 0;
 
     void Start()
     {
