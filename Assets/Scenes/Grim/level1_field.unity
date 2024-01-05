@@ -7169,7 +7169,7 @@ GameObject:
   - component: {fileID: 813584641}
   - component: {fileID: 813584645}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: factory_gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14624,7 +14624,8 @@ MonoBehaviour:
   timerScript: {fileID: 1705085390}
   playerManager: {fileID: 1705085391}
   UiManager: {fileID: 1705085389}
-  timeInSeconds: 100
+  factoryOpen: {fileID: 813584645}
+  timeInSeconds: 10
   itemAmount: 3
 --- !u!1 &1729797519
 GameObject:
