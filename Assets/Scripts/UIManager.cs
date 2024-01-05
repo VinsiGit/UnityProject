@@ -11,18 +11,26 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void InteractionTextActive(bool active, string text = "e")
+    public void InteractionTextActive(bool active, string text = "")
     {
-        interactionText.text = $"[{text}]";
+        if(text != "")
+        {
+            interactionText.text = $"{text}: [e]";
+        }
+        else
+        {
+            interactionText.text = $"[e]";
+        }
+        
         interactionText.gameObject.SetActive(active);
     }
 
