@@ -323,8 +323,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -432, y: 270}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -314.22937, y: -149.65616}
+  m_SizeDelta: {x: 435.5412, y: 278.1188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7786062321166456534
 CanvasRenderer:
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'score:'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -381,15 +381,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -596,6 +596,7 @@ RectTransform:
   - {fileID: 8383764438570643767}
   - {fileID: 461989049515007899}
   - {fileID: 362586484667070834}
+  - {fileID: 1125091997141254153}
   m_Father: {fileID: 6704188723134773599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1387,6 +1388,7 @@ MonoBehaviour:
   timerDisplay: {fileID: 3098168010946473093}
   progressDisplay: {fileID: 1956311696232167783}
   goalDisplay: {fileID: 8425580115446804543}
+  dialogueWindow: {fileID: 2511904611897848501}
 --- !u!1 &8526836148925640667
 GameObject:
   m_ObjectHideFlags: 0
