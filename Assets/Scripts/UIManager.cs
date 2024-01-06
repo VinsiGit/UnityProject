@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI goalDisplay;
     public TextMeshProUGUI dialogueWindow; // New TextMeshProUGUI for dialogue
 
-    private float dialogueDisplayTime;
     private float dialogueTypingDelay = 0.1f; // Typing speed for interaction text
     private Coroutine dialogueCoroutine; // Coroutine reference for interaction text
 
@@ -20,9 +19,6 @@ public class UIManager : MonoBehaviour
     {
         // Initialize interactionTextCoroutine
         dialogueCoroutine = null;
-
-        // Call the method to display the initial dialogue
-        TypeDialogue("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto", 100f);
     }
 
     // Update is called once per frame
@@ -32,7 +28,7 @@ public class UIManager : MonoBehaviour
     }
 
     // Public method to call interaction text from the outside
-    public void TypeDialogue(string text, float displayTime)
+    public void TypeDialogue(string text)
     {
         if (dialogueCoroutine != null)
         {
@@ -42,9 +38,6 @@ public class UIManager : MonoBehaviour
 
         // Use coroutine for interaction text with typewriter effect
         dialogueCoroutine = StartCoroutine(TypeDialogueCoroutine(text));
-
-        // Set the display time to the provided value or use the default
-        dialogueDisplayTime = displayTime;
 
         // Activate the interaction text
         dialogueWindow.gameObject.SetActive(true);
