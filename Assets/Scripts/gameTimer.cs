@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameTimer : MonoBehaviour
+public class GameTimer : MonoBehaviour
 {
     public UIManager UiManager;
     public bool showPercentage = false;

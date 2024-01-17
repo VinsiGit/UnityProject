@@ -82,6 +82,10 @@ public class itemHighlight : MonoBehaviour
             {
                 HighlightObject(hitObject, storeHighlightMat, "talk to stranger");
             }
+            else if (hitObject.tag == "Exit")
+            {
+                HighlightObject(hitObject, pickUpHighlightMat, "use door");
+            }
             else
             {
                 ClearHighlighted();
