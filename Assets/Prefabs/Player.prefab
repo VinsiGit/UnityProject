@@ -1303,8 +1303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588b8dd8b4fe5b842a937fbeae31e610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  sprintSpeed: 6
+  speed: 8
+  sprintSpeed: 10
   jumpSpeed: 3
   gravity: 10
   mouseSensitivity: 200

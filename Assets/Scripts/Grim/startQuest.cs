@@ -112,6 +112,7 @@ public class startQuest : MonoBehaviour
             {
                 //quest complete
                 Debug.Log("quest success");
+                questArchieved = true;
                 //display dat quest gelukt is
                 //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
 

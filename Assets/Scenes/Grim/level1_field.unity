@@ -14389,7 +14389,7 @@ MonoBehaviour:
   playerManager: {fileID: 1705085391}
   UiManager: {fileID: 1705085389}
   factoryOpen: {fileID: 813584645}
-  timeInSeconds: 10
+  timeInSeconds: 100
   itemAmount: 3
 --- !u!1 &1729797519
 GameObject:
