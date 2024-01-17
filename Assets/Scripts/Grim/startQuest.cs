@@ -19,6 +19,7 @@ public class startQuest : MonoBehaviour
     private bool firstInteraction = true;
     private bool questActive = false;
     private bool questArchieved = false;
+    private Coroutine questCoroutine; // Coroutine reference for interaction text
     // Start is called before the first frame update
     void Start()
     {
@@ -48,11 +49,15 @@ public class startQuest : MonoBehaviour
                     exclaimationpoint.SetActive(false);
                     if (questActive == false) 
                     {
-                        StartQuest(timeInSeconds);
+                        questCoroutine = StartCoroutine(StartQuest(timeInSeconds));
                     }
                     else
                     {
-                        //reminder opdracht
+                        string[] reminder = new string[]
+                        {
+                            "Bring me 10 trashbags before the time runs out"
+                        };
+                        UiManager.TypeDialogue(reminder);
                     }
                         
                 }
@@ -60,17 +65,32 @@ public class startQuest : MonoBehaviour
         }
     }
 
-    void StartQuest(int seconds)
+    IEnumerator StartQuest(int seconds)
     {
         //optional: spawn 20 extra trash
-        if(firstInteraction == true)
+        if (firstInteraction == true)
         {
-            //veel tekst
+            string[] longDialogue = new string[]
+            {
+                "Hello, welcome to the dialogue!",
+                "This is the second line.",
+                "And here is the third line.",
+                "Press space to continue..."
+            };
+            UiManager.TypeDialogue(longDialogue);
         }
         else
         {
-            //minder tekst
+            string[] shortDialogue = new string[]
+            {
+                "ja kijk, kijk ja",
+                "Press space to continue..."
+            };
+            UiManager.TypeDialogue(shortDialogue);
         }
+
+        // Wait until the dialogue is finished
+        yield return new WaitUntil(() => UiManager.dialogueFinished == true);
 
         initialScore = PlayerManager.Score;
         questActive = true;
@@ -80,6 +100,8 @@ public class startQuest : MonoBehaviour
 
         timerScript.StartTimer(seconds, "time left");
     }
+
+
 
     void StopQuest()
     {

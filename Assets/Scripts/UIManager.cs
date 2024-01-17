@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI progressDisplay;
     public TextMeshProUGUI goalDisplay;
     public GameObject dialogueWindow;
-    
+    public bool dialogueFinished = false;
+
     private TextMeshProUGUI output_text; // New TextMeshProUGUI for dialogue
     private TextMeshProUGUI next; // New TextMeshProUGUI for dialogue
     private float dialogueTypingDelay = 0.1f; // Typing speed for interaction text
@@ -28,12 +29,15 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // Public method to call interaction text from the outside
-    public void TypeDialogue(string text)
+
+    // Public method to call interaction text from the outside
+    public void TypeDialogue(string[] texts)
     {
+        dialogueFinished = false;
         next.gameObject.SetActive(false);
         if (dialogueCoroutine != null)
         {
@@ -42,46 +46,51 @@ public class UIManager : MonoBehaviour
         }
 
         // Use coroutine for interaction text with typewriter effect
-        dialogueCoroutine = StartCoroutine(TypeDialogueCoroutine(text));
+        dialogueCoroutine = StartCoroutine(TypeDialogueCoroutine(texts));
 
         // Activate the interaction text
         dialogueWindow.gameObject.SetActive(true);
     }
 
-    private IEnumerator TypeDialogueCoroutine(string textToWrite)
+    private IEnumerator TypeDialogueCoroutine(string[] texts)
     {
-        output_text.text = ""; // Ensure the text is initially empty
-
-        int characterIndex = 0;
-
-        while (characterIndex < textToWrite.Length)
+        for (int i = 0; i < texts.Length; i++)
         {
-            // Append one character to the dialogue window
-            output_text.text += textToWrite[characterIndex];
-            characterIndex++;
+            output_text.text = ""; // Ensure the text is initially empty
 
-            // Wait for the specified time before typing the next character
-            yield return new WaitForSeconds(dialogueTypingDelay);
+            int characterIndex = 0;
+
+            while (characterIndex < texts[i].Length)
+            {
+                // Append one character to the dialogue window
+                output_text.text += texts[i][characterIndex];
+                characterIndex++;
+
+                // Wait for the specified time before typing the next character
+                yield return new WaitForSeconds(dialogueTypingDelay);
+            }
+
+            next.gameObject.SetActive(true);
+
+            // Wait until the spacebar is pressed
+            while (!Input.GetKey(KeyCode.Space))
+            {
+                yield return null;
+            }
+
+            // Clear the dialogue window after the spacebar is pressed
+            output_text.text = "";
+            next.gameObject.SetActive(false);
         }
 
-        next.gameObject.SetActive(true);
-
-        // Wait until the spacebar is pressed
-        while (!Input.GetKey(KeyCode.Space))
-        {
-            yield return null;
-        }
-
-        // Clear the dialogue window after the spacebar is pressed
-        output_text.text = "";
-
-        // Deactivate the dialogue window
+        // Deactivate the dialogue window after the last string
+        dialogueFinished = true;
         dialogueWindow.gameObject.SetActive(false);
     }
 
     public void InteractionTextActive(bool active, string text = "")
     {
-        if(text != "")
+        if (text != "")
         {
             interactionText.text = $"{text}: [e]";
         }
@@ -89,7 +98,7 @@ public class UIManager : MonoBehaviour
         {
             interactionText.text = $"[e]";
         }
-        
+
         interactionText.gameObject.SetActive(active);
     }
 
