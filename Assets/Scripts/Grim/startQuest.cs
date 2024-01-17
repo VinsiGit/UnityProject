@@ -8,8 +8,7 @@ using UnityEngine;
 public class startQuest : MonoBehaviour
 {
 
-    public gameTimer timerScript;
-    public PlayerManager playerManager;
+    public GameTimer timerScript;
     public UIManager UiManager;
     public Animator factoryOpen;
     
@@ -73,7 +72,7 @@ public class startQuest : MonoBehaviour
             //minder tekst
         }
 
-        initialScore = playerManager.score;
+        initialScore = PlayerManager.Score;
         questActive = true;
         firstInteraction = false;
 
@@ -99,7 +98,7 @@ public class startQuest : MonoBehaviour
 
         if(questActive == true)
         {
-            UiManager.UpdateQuestProgress($"{playerManager.score - initialScore}/{itemAmount}");
+            UiManager.UpdateQuestProgress($"{PlayerManager.Score - initialScore}/{itemAmount}");
             if (timerScript.timerComplete == true)
             {
                 //quest failed
@@ -108,7 +107,7 @@ public class startQuest : MonoBehaviour
                 timerScript.timerComplete = false; //reset timerend not to introduce bugs or something
                 StopQuest();
             }
-            else if ((playerManager.score - initialScore) == itemAmount)
+            else if ((PlayerManager.Score - initialScore) == itemAmount)
             {
                 //quest complete
                 Debug.Log("quest success");
