@@ -23,7 +23,18 @@ public class startQuest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayIntro();
+    }
+
+    void PlayIntro()
+    {
+        string[] intro = new string[]
+{
+                "Hi,you are a trashman. This field is littered with trash",
+                "It is your job to collect this trash",
+                "Now go, before I fire your ass"
+};
+        UiManager.TypeDialogue(intro);
     }
 
     void DetectObject()
