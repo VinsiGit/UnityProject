@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI scoreDisplay; // direct reference to textmesh -> change to inventory attribute of playermanager
     public TextMeshProUGUI healthDisplay; // display for player's health
 
-    private int score = 0;
+    private static int score = 0;
     private int health = 100; // player's health
 
     void Start()
