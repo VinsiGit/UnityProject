@@ -11,6 +11,11 @@ public class PlayerManager : MonoBehaviour
     private static int score = 0;
     private int health = 100; // player's health
 
+    public static int Score
+    {
+        get { return score; }
+    }
+
     void Start()
     {
 
