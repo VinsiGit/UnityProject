@@ -220,7 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7309699463832768161}
   - component: {fileID: 2385533926553110325}
-  - component: {fileID: 8563299877992573111}
+  - component: {fileID: 4956161769828014990}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -267,7 +267,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8563299877992573111
+--- !u!114 &4956161769828014990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3706076023373846068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56239ef0b0bbd574787774f9cca308b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b463acb532e7734cb91468eb20ca416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 0.5

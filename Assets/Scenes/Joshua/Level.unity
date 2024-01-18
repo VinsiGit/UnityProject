@@ -288,22 +288,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefabs:
-  - {fileID: 254580715370916315, guid: 01782efa817d18e489e3c873376e00dc, type: 3}
+  - {fileID: 254580715370916315, guid: 3d6f9d5aa1f89b64d8f38164412f60b4, type: 3}
   - {fileID: 254580715370916315, guid: 3e346638f1ae2454fb31d2e1c573c36f, type: 3}
   - {fileID: 254580715370916315, guid: 50ec042714da66b478a9319441bcbb27, type: 3}
   roadPrefab: {fileID: 1486849347943369212, guid: 4c46aa5166faa1a44ab7f62102e14bff,
     type: 3}
   intersectionPrefab: {fileID: 2576820526575496265, guid: d88ab4c5240f06640ad1e659cf050e2a,
     type: 3}
-  playerPrefab: {fileID: 7542192911900621936, guid: d417a09e68ab74a49ad987c76f093192,
+  playerPrefab: {fileID: 7542192911900621936, guid: adb55aa31bd1e4246ae4c9abfa81b052,
     type: 3}
-  containerPrefab: {fileID: 8515733072569678923, guid: 496daa7fe82a720469da20e38ee679fa,
+  containerPrefab: {fileID: 8515733072569678923, guid: 22b1a88b339e31c4f96dc33a9c38a182,
     type: 3}
   wallMaterial: {fileID: 2100000, guid: 2fcc2d7715babc8498961473ab84f83e, type: 2}
   pickupPrefab: {fileID: 2152011778745676045, guid: 3d8054cd80b5110419192b37f2847b69,
     type: 3}
   numberOfPickups: 60
-  enemyPrefab: {fileID: 6185669655685308015, guid: 5a41109c83e37ea408b7b89f27fd85ea,
+  enemyPrefab: {fileID: 8334568945730781577, guid: 0c74cba0057d1b945a4e78f2633e5e03,
     type: 3}
   numberOfEnemies: 60
   openSpacePrefab: {fileID: 2460877806928568365, guid: c9f04086f671f644ba6c0d1c998dc5c3,
