@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Joshua/Enemy.prefab.meta
 guid: 5a41109c83e37ea408b7b89f27fd85ea
+=======
+guid: 3d6f9d5aa1f89b64d8f38164412f60b4
+>>>>>>> 7f16b0bace588fd1d88117989c8265e20e077e38:Assets/Prefabs/Enemy.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

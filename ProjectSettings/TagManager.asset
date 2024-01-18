@@ -6,14 +6,16 @@ TagManager:
   tags:
   - Item
   - Container
+  - NPC
+  - Exit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - minimap
   - Water
   - UI
-  - 
+  - playerView
   - 
   - 
   - 

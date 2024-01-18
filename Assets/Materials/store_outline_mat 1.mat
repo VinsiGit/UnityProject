@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: store_outline_mat
+  m_Name: store_outline_mat 1
   m_Shader: {fileID: -6465566751694194690, guid: da87e71ff5b5dbf47bd27668e515acdb,
     type: 3}
   m_Parent: {fileID: 0}

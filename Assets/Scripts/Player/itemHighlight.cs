@@ -28,7 +28,7 @@ public class itemHighlight : MonoBehaviour
         }
     }
 
-    void HighlightObject(GameObject gameObject, Material highLightMat)
+    void HighlightObject(GameObject gameObject, Material highLightMat, string text = "")
     {
         if (prevHighlight != gameObject)
         {
@@ -52,7 +52,7 @@ public class itemHighlight : MonoBehaviour
             prevHighlight = gameObject;
 
             // Show the interaction text
-            UiManager.InteractionTextActive(true, "e");
+            UiManager.InteractionTextActive(true, text);
         }
     }
 
@@ -72,11 +72,19 @@ public class itemHighlight : MonoBehaviour
             GameObject hitObject = rayHit.collider.gameObject;
             if (hitObject.tag == "Item")
             {
-                HighlightObject(hitObject, pickUpHighlightMat);
+                HighlightObject(hitObject, pickUpHighlightMat, "");
             }
             else if (hitObject.tag == "Container") // also add check with playermanager if player is carrying
             {
-                HighlightObject(hitObject, storeHighlightMat);
+                HighlightObject(hitObject, storeHighlightMat, "");
+            }
+            else if (hitObject.tag == "NPC")
+            {
+                HighlightObject(hitObject, storeHighlightMat, "talk to stranger");
+            }
+            else if (hitObject.tag == "Exit")
+            {
+                HighlightObject(hitObject, pickUpHighlightMat, "use door");
             }
             else
             {
