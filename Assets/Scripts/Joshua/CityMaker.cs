@@ -159,63 +159,77 @@ public class CityMaker : MonoBehaviour
         return adjacentRoads;
     }
 
-
     void GeneratePlayer()
     {
-        if (grassPositions.Count > 0)
-        {
-            Vector3 playerPosition = grassPositions[Random.Range(0, grassPositions.Count)];
-            player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
+        // Calculate the position next to the city wall
+        Vector3 playerPosition = new Vector3(cityWidth * 5, 0, 0);
 
-            // Find a suitable position for the container
-            Vector3 containerPosition = Vector3.zero;
-            for (int i = 0; i < 100; i++) // Try 100 times
-            {
-                // Generate a random direction
-                float xDirection = (Random.value < 0.5f) ? Random.Range(-5f, -2f) : Random.Range(2f, 5f);
-                float zDirection = (Random.value < 0.5f) ? Random.Range(-5f, -2f) : Random.Range(2f, 5f);
-                Vector3 direction = new Vector3(xDirection, 0, zDirection).normalized;
-                // Calculate the container position
-                containerPosition = playerPosition + direction * 10;
+        // Instantiate the player facing towards the city
+        player = Instantiate(playerPrefab, playerPosition, Quaternion.Euler(0, 90, 0));
 
-                // Check if the container position is on grass
-                if (grassPositions.Contains(containerPosition))
-                {
-                    // The container position is suitable, exit the loop
-                    break;
-                }
-            }
+        // Calculate the position for the container next to the player
+        Vector3 containerPosition = playerPosition + new Vector3(20, 0, 0);
 
-            GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
-            container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
-        }
-        else if (roadPositions.Count > 0)
-        {
-            Vector3 playerPosition = roadPositions[Random.Range(0, roadPositions.Count)];
-            player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
-
-            // Find a suitable position for the container
-            Vector3 containerPosition = Vector3.zero;
-            for (int i = 0; i < 100; i++) // Try 100 times
-            {
-                // Generate a random direction
-                Vector3 direction = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f)).normalized;
-
-                // Calculate the container position
-                containerPosition = playerPosition + direction * 5;
-
-                // Check if the container position is on a road
-                if (roadPositions.Contains(containerPosition))
-                {
-                    // The container position is suitable, exit the loop
-                    break;
-                }
-            }
-
-            GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
-            container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
-        }
+        // Instantiate the container
+        GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
+        container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
     }
+    // void GeneratePlayer()
+    // {
+    //     if (grassPositions.Count > 0)
+    //     {
+    //         Vector3 playerPosition = grassPositions[Random.Range(0, grassPositions.Count)];
+    //         player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
+
+    //         // Find a suitable position for the container
+    //         Vector3 containerPosition = Vector3.zero;
+    //         for (int i = 0; i < 100; i++) // Try 100 times
+    //         {
+    //             // Generate a random direction
+    //             float xDirection = (Random.value < 0.5f) ? Random.Range(-5f, -2f) : Random.Range(2f, 5f);
+    //             float zDirection = (Random.value < 0.5f) ? Random.Range(-5f, -2f) : Random.Range(2f, 5f);
+    //             Vector3 direction = new Vector3(xDirection, 0, zDirection).normalized;
+    //             // Calculate the container position
+    //             containerPosition = playerPosition + direction * 10;
+
+    //             // Check if the container position is on grass
+    //             if (grassPositions.Contains(containerPosition))
+    //             {
+    //                 // The container position is suitable, exit the loop
+    //                 break;
+    //             }
+    //         }
+
+    //         GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
+    //         container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
+    //     }
+    //     else if (roadPositions.Count > 0)
+    //     {
+    //         Vector3 playerPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+    //         player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
+
+    //         // Find a suitable position for the container
+    //         Vector3 containerPosition = Vector3.zero;
+    //         for (int i = 0; i < 100; i++) // Try 100 times
+    //         {
+    //             // Generate a random direction
+    //             Vector3 direction = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f)).normalized;
+
+    //             // Calculate the container position
+    //             containerPosition = playerPosition + direction * 5;
+
+    //             // Check if the container position is on a road
+    //             if (roadPositions.Contains(containerPosition))
+    //             {
+    //                 // The container position is suitable, exit the loop
+    //                 break;
+    //             }
+    //         }
+
+    //         GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
+    //         container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
+    //     }
+    // }
     void GenerateEnemies()
     {
         for (int i = 0; i < numberOfEnemies; i++)
