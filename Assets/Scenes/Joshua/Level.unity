@@ -305,7 +305,7 @@ MonoBehaviour:
   numberOfPickups: 60
   enemyPrefab: {fileID: 8334568945730781577, guid: 0c74cba0057d1b945a4e78f2633e5e03,
     type: 3}
-  numberOfEnemies: 60
+  numberOfEnemies: 2
   openSpacePrefab: {fileID: 2460877806928568365, guid: c9f04086f671f644ba6c0d1c998dc5c3,
     type: 3}
   cityWidth: 20
