@@ -31,7 +31,7 @@ public class startQuest : MonoBehaviour
         string[] intro = new string[]
 {
                 "Hi,you are a trashman. This field is littered with trash",
-                "It is your job to collect this trash",
+                "It is your responsibility to collect this trash",
                 "Now go, before I fire your ass"
 };
         UiManager.TypeDialogue(intro);
@@ -83,10 +83,11 @@ public class startQuest : MonoBehaviour
         {
             string[] longDialogue = new string[]
             {
-                "Hello, welcome to the dialogue!",
-                "This is the second line.",
-                "And here is the third line.",
-                "Press space to continue..."
+                "Oh hi, i see you're collecting trash",
+                "I could use your help. We had a bit of an oopsie in the factory and now it is littered with radioactive trash. Maybe you can throw them in your radiation-proof garbage truck with built-in homeless shelter™",
+                "You have to be quick tho, as if you stay inside for too long, the radiation becomes lethal",
+                $"So to prove you are quick enough, you get {timeInSeconds} seconds to deliver {itemAmount} trash bags to the dumpster next to me.",
+                "good luck!"
             };
             UiManager.TypeDialogue(longDialogue);
         }
@@ -94,8 +95,8 @@ public class startQuest : MonoBehaviour
         {
             string[] shortDialogue = new string[]
             {
-                "ja kijk, kijk ja",
-                "Press space to continue..."
+                "Ah, you're back. You think you can do it this time?",
+                $"Remember, {itemAmount} trash bags in {timeInSeconds} seconds. Good luck!"
             };
             UiManager.TypeDialogue(shortDialogue);
         }
@@ -135,7 +136,12 @@ public class startQuest : MonoBehaviour
             if (timerScript.timerComplete == true)
             {
                 //quest failed
-                Debug.Log("quest failed");
+                string[] failDialogue = new string[]
+                {
+                    "ahh, you ran out of time",
+                    "Don't worry tho. You can always come back when you think you're ready!"
+                };
+                UiManager.TypeDialogue(failDialogue);
                 //manneke zegt da ge altijd opnieuw moogt proberen, en je mag terugkomen wanneer er dankt klaar voor te zijn
                 timerScript.timerComplete = false; //reset timerend not to introduce bugs or something
                 StopQuest();
@@ -143,7 +149,13 @@ public class startQuest : MonoBehaviour
             else if ((PlayerManager.Score - initialScore) == itemAmount)
             {
                 //quest complete
-                Debug.Log("quest success");
+                string[] successDialogue = new string[]
+                {
+                    "Great work!, you completed the assignent!",
+                    "The factory entrance is now open, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
+                    "good luck, and thanks for helping"
+                };
+                UiManager.TypeDialogue(successDialogue);
                 questArchieved = true;
                 //display dat quest gelukt is
                 //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
