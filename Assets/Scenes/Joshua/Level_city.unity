@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPrefabs:
-  - {fileID: 254580715370916315, guid: 3d6f9d5aa1f89b64d8f38164412f60b4, type: 3}
+  - {fileID: 254580715370916315, guid: 44b3052161b062d4786056fbbfe9ad95, type: 3}
   - {fileID: 254580715370916315, guid: 3e346638f1ae2454fb31d2e1c573c36f, type: 3}
   - {fileID: 254580715370916315, guid: 50ec042714da66b478a9319441bcbb27, type: 3}
   roadPrefab: {fileID: 1486849347943369212, guid: 4c46aa5166faa1a44ab7f62102e14bff,
@@ -300,18 +300,18 @@ MonoBehaviour:
   containerPrefab: {fileID: 8515733072569678923, guid: 22b1a88b339e31c4f96dc33a9c38a182,
     type: 3}
   wallMaterial: {fileID: 2100000, guid: 2fcc2d7715babc8498961473ab84f83e, type: 2}
-  pickupPrefab: {fileID: 2152011778745676045, guid: 3d8054cd80b5110419192b37f2847b69,
+  pickupPrefab: {fileID: 4492255937167888290, guid: 4f4cab203b32c1347918158fe0659ae2,
     type: 3}
   numberOfPickups: 60
   enemyPrefab: {fileID: 8334568945730781577, guid: 0c74cba0057d1b945a4e78f2633e5e03,
     type: 3}
-  numberOfEnemies: 2
+  numberOfEnemies: 60
   openSpacePrefab: {fileID: 2460877806928568365, guid: c9f04086f671f644ba6c0d1c998dc5c3,
     type: 3}
-  cityWidth: 20
-  cityLength: 20
-  roadFrequencyX: 4
-  roadFrequencyZ: 4
+  cityWidth: 10
+  cityLength: 10
+  roadFrequencyX: 3
+  roadFrequencyZ: 3
   birdPrefab: {fileID: 3706076023373846068, guid: a82703ae273c08749abf00b73ebf56cb,
     type: 3}
   numberOfBirds: 50

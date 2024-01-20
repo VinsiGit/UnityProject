@@ -1671,7 +1671,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7e270a31efd734442b10e385552ce09d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9015709cbc7d69348857afd72408852e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpHighlightMat: {fileID: 2100000, guid: 4b7b640ce76140b4e8cef39386b96876, type: 2}
-  storeHighlightMat: {fileID: 2100000, guid: 503fe76fbbe43b44e91e632b38a043ec, type: 2}
+  storeHighlightMat: {fileID: 2100000, guid: ca233a2bd7694b74db8ebbbb84ddce10, type: 2}
   UiManager: {fileID: 1394102315746490498}
 --- !u!114 &3655280664924630691
 MonoBehaviour:

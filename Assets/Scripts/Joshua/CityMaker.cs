@@ -27,13 +27,15 @@ public class CityMaker : MonoBehaviour
     public int numberOfBirds = 10; // Adjust this as needed
     public float birdHeight = 50f; // Adjust this as needed
     private GameObject player; // Assign this in the Unity editor
-
+    private GameObject container;
 
     private List<Vector3> roadPositions = new List<Vector3>();
     private List<Vector3> grassPositions = new List<Vector3>();
 
 
     private bool[,] roadPositionsBool;
+    private bool[,] carPositionsBool;
+
     void Start()
     {
         roadPositionsBool = new bool[cityWidth, cityLength];
@@ -45,16 +47,32 @@ public class CityMaker : MonoBehaviour
         GeneratePickups();
         GenerateWalls();
         GenerateBirds(); // Add this line
+        InvokeRepeating("AddEnemy", 10.0f, 10.0f);
 
         // GenerateMinimapCamera(); // Add this line
 
+    }
+    void AddEnemy()
+    {
+        Vector3 playerPosition = player.transform.position;
+        Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
+
+        Vector3 enemyPosition;
+        do
+        {
+            enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+        }
+        while (Vector3.Distance(enemyPosition, playerPosition) < 5 && Vector3.Distance(enemyPosition, containerPosition) < 5);
+
+        Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
     }
 
     void GenerateCity()
     {
         GenerateRoads();
-        GetComponent<NavMeshSurface>().BuildNavMesh();
         GenerateBuildings();
+
+        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
     void GenerateRoads()
@@ -168,10 +186,10 @@ public class CityMaker : MonoBehaviour
         player = Instantiate(playerPrefab, playerPosition, Quaternion.Euler(0, 90, 0));
 
         // Calculate the position for the container next to the player
-        Vector3 containerPosition = playerPosition + new Vector3(20, 0, 0);
+        Vector3 containerPosition = playerPosition + new Vector3(5 * roadFrequencyX, 0, 0);
 
         // Instantiate the container
-        GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
+        container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
         container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
     }
     // void GeneratePlayer()
@@ -232,11 +250,20 @@ public class CityMaker : MonoBehaviour
     // }
     void GenerateEnemies()
     {
+        Vector3 playerPosition = player.transform.position;
+        Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
+
         for (int i = 0; i < numberOfEnemies; i++)
         {
             if (roadPositions.Count > 0)
             {
-                Vector3 enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+                Vector3 enemyPosition;
+                do
+                {
+                    enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+                }
+                while (Vector3.Distance(enemyPosition, playerPosition) < 5 && Vector3.Distance(enemyPosition, containerPosition) < 5);
+
                 Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
             }
         }
@@ -244,18 +271,27 @@ public class CityMaker : MonoBehaviour
 
     void GeneratePickups()
     {
+        Vector3 playerPosition = player.transform.position;
+        Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
+
         for (int i = 0; i < numberOfPickups; i++)
         {
             if (roadPositions.Count > 0)
             {
                 Vector3 pickupPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+                Quaternion pickupRotation;
+                do
+                {
+                    float offsetX = Random.Range(-4f, 4f);
+                    float offsetZ = Random.Range(-4f, 4f);
+                    pickupPosition += new Vector3(offsetX, 0.7f, offsetZ);
 
-                float offsetX = Random.Range(-4f, 4f);
-                float offsetZ = Random.Range(-4f, 4f);
-                pickupPosition += new Vector3(offsetX, 0.7f, offsetZ);
+                    float randomYRotation = Random.Range(0f, 360f);
+                    pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
 
-                float randomYRotation = Random.Range(0f, 360f);
-                Quaternion pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
+                }
+                while (Vector3.Distance(pickupPosition, playerPosition) < 5 && Vector3.Distance(pickupPosition, containerPosition) < 5);
+
 
                 Instantiate(pickupPrefab, pickupPosition, pickupRotation);
             }
