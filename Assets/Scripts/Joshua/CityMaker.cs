@@ -180,7 +180,7 @@ public class CityMaker : MonoBehaviour
     void GeneratePlayer()
     {
         // Calculate the position next to the city wall
-        Vector3 playerPosition = new Vector3(cityWidth * 5, 0, 0);
+        Vector3 playerPosition = new Vector3(40, 0, 0);
 
         // Instantiate the player facing towards the city
         player = Instantiate(playerPrefab, playerPosition, Quaternion.Euler(0, 90, 0));
@@ -189,8 +189,7 @@ public class CityMaker : MonoBehaviour
         Vector3 containerPosition = playerPosition + new Vector3(5 * roadFrequencyX, 0, 0);
 
         // Instantiate the container
-        container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
-        container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
+        container = Instantiate(containerPrefab, containerPosition, Quaternion.Euler(0, 90, 0));
     }
     // void GeneratePlayer()
     // {
@@ -262,7 +261,7 @@ public class CityMaker : MonoBehaviour
                 {
                     enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
                 }
-                while (Vector3.Distance(enemyPosition, playerPosition) < 5 && Vector3.Distance(enemyPosition, containerPosition) < 5);
+                while (Vector3.Distance(enemyPosition, playerPosition) < 20 && Vector3.Distance(enemyPosition, containerPosition) < 20);
 
                 Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
             }
@@ -284,7 +283,7 @@ public class CityMaker : MonoBehaviour
                 {
                     float offsetX = Random.Range(-4f, 4f);
                     float offsetZ = Random.Range(-4f, 4f);
-                    pickupPosition += new Vector3(offsetX, 0.7f, offsetZ);
+                    pickupPosition += new Vector3(offsetX, 0.0f, offsetZ);
 
                     float randomYRotation = Random.Range(0f, 360f);
                     pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
