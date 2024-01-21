@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
         dialogueCoroutine = null;
 
         // Call the method to display the initial dialogue
-        TypeDialogue("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto", 100f);
+        TypeDialogue("Collect the Nuclear waste before you die of radiation poisening!", 100f);
     }
 
     // Update is called once per frame
