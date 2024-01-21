@@ -137,6 +137,11 @@ PrefabInstance:
       propertyPath: damageAudio
       value: 
       objectReference: {fileID: 8300000, guid: f2c7b8332db15d24fae6d824f537dbd9, type: 3}
+    - target: {fileID: 3903481657311164731, guid: 370b5457f1da2ec4cbaecb7c186fc70a,
+        type: 3}
+      propertyPath: damageAmount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6704188723134773599, guid: 370b5457f1da2ec4cbaecb7c186fc70a,
         type: 3}
       propertyPath: m_LocalPosition.x

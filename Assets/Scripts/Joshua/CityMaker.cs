@@ -60,6 +60,8 @@ public class CityMaker : MonoBehaviour
     }
     void AddEnemy()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
 
@@ -262,6 +264,8 @@ public class CityMaker : MonoBehaviour
     // }
     public void GenerateEnemies()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
 
@@ -283,6 +287,8 @@ public class CityMaker : MonoBehaviour
 
     public void GeneratePickups()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
 
