@@ -9,7 +9,7 @@ public class TruckUI : MonoBehaviour
 
     private TextMeshProUGUI output_text; // New TextMeshProUGUI for dialogue
     private TextMeshProUGUI next; // New TextMeshProUGUI for dialogue
-    private float dialogueTypingDelay = 0.1f; // Typing speed for interaction text
+    private float dialogueTypingDelay = 0.005f; // Typing speed for interaction text
     private Coroutine dialogueCoroutine; // Coroutine reference for interaction text
 
     // Start is called before the first frame update

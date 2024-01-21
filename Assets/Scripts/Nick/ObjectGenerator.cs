@@ -8,22 +8,25 @@ public class ObjectGenerator : MonoBehaviour
     public int selectedInteger = 10;
     private float timeSinceLastGenerate = 0f;
     private float generateInterval = 3f;
+    private bool logicActive = false;
 
     void Update()
     {
-        timeSinceLastGenerate += Time.deltaTime;
+        if (logicActive);
 
-        if (timeSinceLastGenerate >= generateInterval)
-        {
-            GenerateObject();
-            timeSinceLastGenerate = 0f;
-            selectedInteger -= 1;
+            timeSinceLastGenerate += Time.deltaTime;
 
-            if (selectedInteger <= 0)
+            if (timeSinceLastGenerate >= generateInterval)
             {
-                Debug.Log("Selected integer reached zero or less. Do something else here.");
+                GenerateObject();
+                timeSinceLastGenerate = 0f;
+                selectedInteger -= 1;
+
+                if (selectedInteger <= 0)
+                {
+                    Debug.Log("Selected integer reached zero or less. Do something else here.");
+                }
             }
-        }
     }
 
     void GenerateObject()
