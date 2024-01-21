@@ -4,6 +4,7 @@ public class Damage : MonoBehaviour
 {
     private PlayerManager playerManager; // Reference to the PlayerManager
 
+    public AudioClip damageAudio;
     private float damageTimer = 0; // Timer for damage
     private bool isInvincible = false; // Invincibility status
 
@@ -30,7 +31,10 @@ public class Damage : MonoBehaviour
     {
         playerManager.Damage(10); // decrease health by 10
         isInvincible = true;
-
+        if (damageAudio != null)
+        {
+            AudioSource.PlayClipAtPoint(damageAudio, transform.position);
+        }
         damageTimer = 2; // set invincibility duration
     }
     void OnTriggerEnter(Collider other)
