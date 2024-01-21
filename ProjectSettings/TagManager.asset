@@ -7,6 +7,7 @@ TagManager:
   - Item
   - Container
   - NPC
+  - Exit
   layers:
   - Default
   - TransparentFX
