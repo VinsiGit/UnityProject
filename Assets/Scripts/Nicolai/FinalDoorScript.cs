@@ -17,7 +17,7 @@ public class FinalDoorScript : MonoBehaviour
     void Update()
     {
 
-        if (playerManager.score == 10)
+        if (PlayerManager.score == 10)
         {
             Destroy(doorTransform.gameObject);
         }

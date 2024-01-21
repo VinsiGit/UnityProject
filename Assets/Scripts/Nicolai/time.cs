@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement; // Voeg deze regel toe om toegang te krijgen 
 
 public class time : MonoBehaviour
 {
-    public gameTimer timescript;
+    public GameTimer timescript;
     public int timer = 500;
 
 
