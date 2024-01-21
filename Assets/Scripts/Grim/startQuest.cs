@@ -32,9 +32,9 @@ public class startQuest : MonoBehaviour
     {
         string[] intro = new string[]
 {
-                "Hi,you are a trashman. This field is littered with trash",
-                "It is your responsibility to collect this trash",
-                "Now go, before I fire your ass"
+                "Hi, welcome to your first day on the job as a trashman. As you can see, this field is littered with trash.",
+                "It is your responsibility to collect this trash, and throw it into the truck.",
+                "Now go, before I fire your ass!"
 };
         UiManager.TypeDialogue(intro);
     }
@@ -85,9 +85,9 @@ public class startQuest : MonoBehaviour
         {
             string[] longDialogue = new string[]
             {
-                "Oh hi, i see you're collecting trash",
-                "I could use your help. We had a bit of an oopsie in the factory and now it is littered with radioactive trash. Maybe you can throw them in your unbranded radiation-proof garbage truck™",
-                "You have to be quick tho, as if you stay inside for too long, the radiation becomes lethal",
+                "Oh hi, i see you're collecting trash...",
+                "I could use your help. We had a bit of an oopsie in the factory and now it is littered with radioactive trash. Maybe you can throw them in your radiation-proof garbage truck™",
+                "You have to be quick tho, as if you stay inside for too long, the radiation becomes lethal.",
                 $"So to prove you are quick enough, you get {timeInSeconds} seconds to deliver {itemAmount} trash bags to the dumpster next to me.",
                 "good luck!"
             };
@@ -140,7 +140,7 @@ public class startQuest : MonoBehaviour
                 //quest failed
                 string[] failDialogue = new string[]
                 {
-                    "ahh, you ran out of time",
+                    "ahh, you ran out of time...",
                     "Don't worry tho. You can always come back when you think you're ready!"
                 };
                 UiManager.TypeDialogue(failDialogue);
@@ -153,10 +153,11 @@ public class startQuest : MonoBehaviour
                 //quest complete
                 string[] successDialogue = new string[]
                 {
-                    "Great work!, you completed the assignent!",
+                    "Great work!, you completed the assignment!",
                     "The factory entrance is now open, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
-                    "And if you can't find your truck, just follow the emergency exity signs. They lead to the garage where i'll park your truck",
-                    "good luck, and thanks again for helping"
+                    "The radioactive trash is also quite spread out, so you'll have to really search for them!",
+                    "And if you can't find your truck, just follow the emergency exit signs. They lead to the garage where i'll park your truck.",
+                    "good luck, and thanks again for the help!"
                 };
                 UiManager.TypeDialogue(successDialogue);
                 questArchieved = true;
