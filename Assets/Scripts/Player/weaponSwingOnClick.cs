@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class weaponSwingOnClick : MonoBehaviour
 {
-    Animator anim;
+    private Animator anim;
+    public pauseManager pauseMan; // Reference to the PauseManager script or any other script controlling pause state
+    public AudioSource src;
+    public AudioClip whoosh;
 
     void Start()
     {
@@ -13,9 +16,11 @@ public class weaponSwingOnClick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        // Check if the game is not paused before responding to mouse clicks
+        if (pauseMan != null && !pauseMan.paused && Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("click");
+            src.PlayOneShot(whoosh);
         }
     }
 }
