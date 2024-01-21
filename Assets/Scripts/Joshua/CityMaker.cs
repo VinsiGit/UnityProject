@@ -38,18 +38,22 @@ public class CityMaker : MonoBehaviour
     private bool[,] roadPositionsBool;
     private bool[,] carPositionsBool;
 
+    public List<Vector3> RoadPositions { get; internal set; }
+
     void Start()
     {
+        player = playerPrefab;
+
         roadPositionsBool = new bool[cityWidth, cityLength];
 
         GenerateCity();
 
         GeneratePlayer();
-        GenerateEnemies();
-        GeneratePickups();
+        // GenerateEnemies();
+        // GeneratePickups();
         GenerateWalls();
         GenerateBirds(); // Add this line
-        InvokeRepeating("AddEnemy", 10.0f, 10.0f);
+        // InvokeRepeating("AddEnemy", 10.0f, 10.0f);
 
         // GenerateMinimapCamera(); // Add this line
 
@@ -185,7 +189,8 @@ public class CityMaker : MonoBehaviour
         Vector3 playerPosition = new Vector3(40, 0, 0);
 
         // Instantiate the player facing towards the city
-        player = Instantiate(playerPrefab, playerPosition, Quaternion.Euler(0, 90, 0));
+        player.transform.position = playerPosition;
+        player.transform.rotation = Quaternion.Euler(0, 90, 0);
 
         // Calculate the position for the container next to the player
         Vector3 containerPosition = playerPosition + new Vector3(5 * roadFrequencyX, 0, 0);
@@ -255,7 +260,7 @@ public class CityMaker : MonoBehaviour
     //         container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
     //     }
     // }
-    void GenerateEnemies()
+    public void GenerateEnemies()
     {
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
@@ -276,7 +281,7 @@ public class CityMaker : MonoBehaviour
         }
     }
 
-    void GeneratePickups()
+    public void GeneratePickups()
     {
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject

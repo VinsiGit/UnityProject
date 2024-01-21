@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour
 {
     private Transform player;
     private NavMeshAgent agent;
-    public AudioSource enemySound; // Add this line
+    public AudioSource enemySound;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
             // If a point was found, set the agent's position to that point
             agent.Warp(hit.position);
         }
-        StartCoroutine(PlaySoundRandomly()); // Add this line
+        StartCoroutine(PlaySoundRandomly());
 
     }
     IEnumerator PlaySoundRandomly()

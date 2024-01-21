@@ -23,10 +23,12 @@ public class startQuest : MonoBehaviour
 
     private Vector3 playerPosition;
     private Vector3 containerPosition;
-    List<Vector3> roadPositions = CityMaker.RoadPositions;
+    List<Vector3> roadPositions;
 
     void Start()
     {
+        roadPositions = CityMaker.RoadPositions;
+
         playerPosition = CityMaker.playerPrefab.transform.position;
         containerPosition = CityMaker.containerPrefab.transform.position; // Assuming 'container' is your container GameObject
 
@@ -88,10 +90,6 @@ public class startQuest : MonoBehaviour
         {
             string[] longDialogue = new string[]
             {
-                "Oh hi, i see you're collecting trash",
-                "I could use your help. We had a bit of an oopsie in the factory and now it is littered with radioactive trash. Maybe you can throw them in your radiation-proof garbage truck with built-in homeless shelter�",
-                "You have to be quick tho, as if you stay inside for too long, the radiation becomes lethal",
-                $"So to prove you are quick enough, you get {timeInSeconds} seconds to deliver {itemAmount} trash bags to the dumpster next to me.",
                 "good luck!"
             };
             UiManager.TypeDialogue(longDialogue);
@@ -107,11 +105,11 @@ public class startQuest : MonoBehaviour
         }
 
         // Wait until the dialogue is finished
-        yield return new WaitUntil(() => UIManager.dialogueFinished); //UiManager.dialogueFinished
+        yield return new WaitUntil(() => UiManager.dialogueFinished);
 
-        GenerateEnemies();
-        GeneratePickups();
-
+        CityMaker.GenerateEnemies();
+        CityMaker.GeneratePickups();
+        CityMaker.InvokeRepeating("AddEnemy", 10.0f, 10.0f);
         initialScore = PlayerManager.Score;
         questActive = true;
         firstInteraction = false;
@@ -119,6 +117,11 @@ public class startQuest : MonoBehaviour
         UiManager.DisplayQuestInfo($"collect {itemAmount} trash bags", $"0/{itemAmount}");
 
         timerScript.StartTimer(seconds, "time left");
+
+        if (true)
+        {
+            int health = PlayerManager.GetHealth();
+        }
     }
 
 
@@ -173,48 +176,49 @@ public class startQuest : MonoBehaviour
         }
     }
 
-    void GenerateEnemies()
-    {
-        for (int i = 0; i < CityMaker.numberOfEnemies; i++)
-        {
-            if (roadPositions.Count > 0)
-            {
-                Vector3 enemyPosition;
-                do
-                {
-                    enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
-                }
-                while (Vector3.Distance(enemyPosition, playerPosition) < 10 && Vector3.Distance(enemyPosition, containerPosition) < 10);
+    // void GenerateEnemies()
+    // {
+    //     Debug.Log(CityMaker.numberOfEnemies);
+    //     for (int i = 0; i < CityMaker.numberOfEnemies; i++)
+    //     {
+    //         if (roadPositions.Count > 0)
+    //         {
+    //             Vector3 enemyPosition;
+    //             do
+    //             {
+    //                 enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+    //             }
+    //             while (Vector3.Distance(enemyPosition, playerPosition) < 10 && Vector3.Distance(enemyPosition, containerPosition) < 10);
 
-                Instantiate(CityMaker.enemyPrefab, enemyPosition, Quaternion.identity);
-            }
-        }
-    }
+    //             Instantiate(CityMaker.enemyPrefab, enemyPosition, Quaternion.identity);
+    //         }
+    //     }
+    // }
 
-    void GeneratePickups()
-    {
+    // void GeneratePickups()
+    // {
 
-        for (int i = 0; i < CityMaker.numberOfPickups; i++)
-        {
-            if (roadPositions.Count > 0)
-            {
-                Vector3 pickupPosition = roadPositions[Random.Range(0, roadPositions.Count)];
-                Quaternion pickupRotation;
-                do
-                {
-                    float offsetX = Random.Range(-4f, 4f);
-                    float offsetZ = Random.Range(-4f, 4f);
-                    pickupPosition += new Vector3(offsetX, 0.0f, offsetZ);
+    //     for (int i = 0; i < CityMaker.numberOfPickups; i++)
+    //     {
+    //         if (roadPositions.Count > 0)
+    //         {
+    //             Vector3 pickupPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+    //             Quaternion pickupRotation;
+    //             do
+    //             {
+    //                 float offsetX = Random.Range(-4f, 4f);
+    //                 float offsetZ = Random.Range(-4f, 4f);
+    //                 pickupPosition += new Vector3(offsetX, 0.0f, offsetZ);
 
-                    float randomYRotation = Random.Range(0f, 360f);
-                    pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
+    //                 float randomYRotation = Random.Range(0f, 360f);
+    //                 pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
 
-                }
-                while (Vector3.Distance(pickupPosition, playerPosition) < 30 && Vector3.Distance(pickupPosition, containerPosition) < 30);
+    //             }
+    //             while (Vector3.Distance(pickupPosition, playerPosition) < 30 && Vector3.Distance(pickupPosition, containerPosition) < 30);
 
 
-                Instantiate(CityMaker.pickupPrefab, pickupPosition, pickupRotation);
-            }
-        }
-    }
+    //             Instantiate(CityMaker.pickupPrefab, pickupPosition, pickupRotation);
+    //         }
+    //     }
+    // }
 }
