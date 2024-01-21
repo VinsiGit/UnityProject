@@ -297,7 +297,7 @@ MonoBehaviour:
     type: 3}
   playerPrefab: {fileID: 7542192911900621936, guid: adb55aa31bd1e4246ae4c9abfa81b052,
     type: 3}
-  containerPrefab: {fileID: 8515733072569678923, guid: 22b1a88b339e31c4f96dc33a9c38a182,
+  containerPrefab: {fileID: 8515733072569678923, guid: 965a53e229a8b634499ec7d4b58df56e,
     type: 3}
   wallMaterial: {fileID: 2100000, guid: 2fcc2d7715babc8498961473ab84f83e, type: 2}
   pickupPrefab: {fileID: 4492255937167888290, guid: 4f4cab203b32c1347918158fe0659ae2,

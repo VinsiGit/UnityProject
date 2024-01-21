@@ -26,6 +26,8 @@ public class CityMaker : MonoBehaviour
     public GameObject birdPrefab; // Assign this in the Unity editor
     public int numberOfBirds = 10; // Adjust this as needed
     public float birdHeight = 50f; // Adjust this as needed
+
+    public GameObject questPrefab;
     private GameObject player; // Assign this in the Unity editor
     private GameObject container;
 
@@ -62,7 +64,7 @@ public class CityMaker : MonoBehaviour
         {
             enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
         }
-        while (Vector3.Distance(enemyPosition, playerPosition) < 5 && Vector3.Distance(enemyPosition, containerPosition) < 5);
+        while (Vector3.Distance(enemyPosition, playerPosition) < 15 && Vector3.Distance(enemyPosition, containerPosition) < 15);
 
         Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
     }
@@ -190,6 +192,12 @@ public class CityMaker : MonoBehaviour
 
         // Instantiate the container
         container = Instantiate(containerPrefab, containerPosition, Quaternion.Euler(0, 90, 0));
+
+        Vector3 questPosition = playerPosition + new Vector3(0, 0, 5);
+
+        // Instantiate the container
+        Instantiate(questPrefab, questPosition, Quaternion.Euler(0, 90, 0));
+
     }
     // void GeneratePlayer()
     // {
@@ -261,7 +269,7 @@ public class CityMaker : MonoBehaviour
                 {
                     enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
                 }
-                while (Vector3.Distance(enemyPosition, playerPosition) < 20 && Vector3.Distance(enemyPosition, containerPosition) < 20);
+                while (Vector3.Distance(enemyPosition, playerPosition) < 10 && Vector3.Distance(enemyPosition, containerPosition) < 10);
 
                 Instantiate(enemyPrefab, enemyPosition, Quaternion.identity);
             }
@@ -289,7 +297,7 @@ public class CityMaker : MonoBehaviour
                     pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
 
                 }
-                while (Vector3.Distance(pickupPosition, playerPosition) < 5 && Vector3.Distance(pickupPosition, containerPosition) < 5);
+                while (Vector3.Distance(pickupPosition, playerPosition) < 30 && Vector3.Distance(pickupPosition, containerPosition) < 30);
 
 
                 Instantiate(pickupPrefab, pickupPosition, pickupRotation);

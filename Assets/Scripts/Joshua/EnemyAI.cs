@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,6 +6,7 @@ public class EnemyAI : MonoBehaviour
 {
     private Transform player;
     private NavMeshAgent agent;
+    public AudioSource enemySound; // Add this line
 
     void Start()
     {
@@ -17,9 +19,17 @@ public class EnemyAI : MonoBehaviour
             // If a point was found, set the agent's position to that point
             agent.Warp(hit.position);
         }
+        StartCoroutine(PlaySoundRandomly()); // Add this line
 
     }
-
+    IEnumerator PlaySoundRandomly()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(2, 6));
+            enemySound.Play();
+        }
+    }
     void Update()
     {
         if (player != null)

@@ -1935,6 +1935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edcd8e0c8bfeda44b58c70cc7494e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySound: {fileID: 2659382914515080179}
 --- !u!195 &-8704090148794389024
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1969,18 +1970,18 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1c973b4ad19ed343ad6efbaa63fba99, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.421
+  m_Volume: 0.991
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 141
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 0
   BypassEffects: 1
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2049,7 +2050,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2064,7 +2065,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.28333333
       inSlope: 0
       outSlope: 0
       tangentMode: 0
