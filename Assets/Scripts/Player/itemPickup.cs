@@ -9,6 +9,9 @@ public class itemPickup : MonoBehaviour
     public PlayerManager playerManager;
     public UIManager UiManager;
     public itemHighlight highlightscript;
+    public AudioSource src;
+    public AudioClip pickup;
+    public AudioClip store;
 
     public float offset_x = 0;
     public float offset_y = -1.2f;
@@ -29,6 +32,8 @@ public class itemPickup : MonoBehaviour
 
         // Destroy the object
         Destroy(gameObject);
+
+        src.PlayOneShot(pickup);
 
         ShowHeldItem(gameObject);
 
@@ -71,6 +76,8 @@ public class itemPickup : MonoBehaviour
         {
             // Destroy the held item
             Destroy(heldItem);
+
+            src.PlayOneShot(store);
 
             playerManager.addScore(1);
 
