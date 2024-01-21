@@ -8,6 +8,9 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent;
     public AudioSource enemySound;
 
+    private bool isCooldown = false;
+
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -32,6 +35,10 @@ public class EnemyAI : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) && !isCooldown)
+        {
+            StartCoroutine(StopAndCooldown());
+        }
         if (player != null)
         {
             agent.SetDestination(player.position);
@@ -40,5 +47,33 @@ public class EnemyAI : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
             }
         }
+    }
+    IEnumerator StopAndCooldown()
+    {
+        isCooldown = true;
+        agent.isStopped = true;
+        agent.speed = 0f;
+        agent.acceleration = 600f;
+
+        // Get the Animator on the child GameObject named "body" and disable it
+        Animator bodyAnimator = transform.Find("body").GetComponent<Animator>();
+        if (bodyAnimator != null)
+        {
+            bodyAnimator.enabled = false;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+        agent.isStopped = false;
+        agent.speed = 8f;
+        agent.acceleration = 4f;
+
+        // Enable the Animator again after the agent starts moving
+        if (bodyAnimator != null)
+        {
+            bodyAnimator.enabled = true;
+        }
+
+        yield return new WaitForSeconds(1.0f); // 1.0s additional wait to complete 2s cooldown
+        isCooldown = false;
     }
 }

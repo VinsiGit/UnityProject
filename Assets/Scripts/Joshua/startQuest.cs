@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class startQuest : MonoBehaviour
 {
 
     public GameTimer timerScript;
     public UIManager UiManager;
+    public PlayerManager playerManager;
+    public StateManager statemanager;
 
     public CityMaker CityMaker;
     public int timeInSeconds = 3;
@@ -17,13 +20,14 @@ public class startQuest : MonoBehaviour
     private int initialScore;
     private bool firstInteraction = true;
     private bool questActive = false;
+
     private bool questArchieved = false;
     private Coroutine questCoroutine; // Coroutine reference for interaction text
                                       // Start is called before the first frame update
 
     private Vector3 playerPosition;
     private Vector3 containerPosition;
-    List<Vector3> roadPositions;
+    private List<Vector3> roadPositions;
 
     void Start()
     {
@@ -32,22 +36,20 @@ public class startQuest : MonoBehaviour
         playerPosition = CityMaker.playerPrefab.transform.position;
         containerPosition = CityMaker.containerPrefab.transform.position; // Assuming 'container' is your container GameObject
 
-        PlayIntro();
     }
 
     void PlayIntro()
     {
         string[] intro = new string[]
-{
-                "Hi,you are a trashman. This field is littered with trash",
-                "It is your responsibility to collect this trash",
-                "Now go, before I fire your ass"
-};
+            {
+                "Hi, you are a trashman. This city is littered with trash, be careful there are dangerous street dogs.",
+            };
         UiManager.TypeDialogue(intro);
     }
 
     void DetectObject()
     {
+
         // Detect object with raycast
         float rayDistance = 2.5f;
 
@@ -64,18 +66,24 @@ public class startQuest : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-                    Transform parentObject = rayHit.transform.parent;
+
                     if (questActive == false)
                     {
+                        hitObject.tag = "";
                         questCoroutine = StartCoroutine(StartQuest(timeInSeconds));
+                        hitObject.tag = "NPC";
                     }
                     else
                     {
                         string[] reminder = new string[]
                         {
-                            "Bring me 10 trashbags before the time runs out"
+                            $"Hey, you haven't cleaned the city enough"
                         };
                         UiManager.TypeDialogue(reminder);
+                    }
+                    if ((PlayerManager.Score - initialScore) >= itemAmount)
+                    {
+                        statemanager.loadNextLevel();
                     }
 
                 }
@@ -90,7 +98,11 @@ public class startQuest : MonoBehaviour
         {
             string[] longDialogue = new string[]
             {
-                "good luck!"
+                "Yo, I see you're on time.",
+                "You have to collect as many discarded cardboard boxes as you think necessary.",
+                "You can get as many boxes as you want but be aware of the street dogs, you can swing your bat to scare them.",
+                "If you feel it's getting too dangerous, talk to me if you want to leave.",
+                "Good luck!",
             };
             UiManager.TypeDialogue(longDialogue);
         }
@@ -98,30 +110,28 @@ public class startQuest : MonoBehaviour
         {
             string[] shortDialogue = new string[]
             {
-                "Ah, you're back. You think you can do it this time?",
-                $"Remember, {itemAmount} trash bags in {timeInSeconds} seconds. Good luck!"
+                "Hey, you haven't cleaned the city enough."
             };
             UiManager.TypeDialogue(shortDialogue);
         }
 
         // Wait until the dialogue is finished
         yield return new WaitUntil(() => UiManager.dialogueFinished);
+        if (firstInteraction)
+        {
 
-        CityMaker.GenerateEnemies();
-        CityMaker.GeneratePickups();
-        CityMaker.InvokeRepeating("AddEnemy", 10.0f, 10.0f);
-        initialScore = PlayerManager.Score;
+
+            CityMaker.GenerateEnemies();
+            CityMaker.GeneratePickups();
+            CityMaker.InvokeRepeating("AddEnemy", 10.0f, 10.0f);
+            initialScore = PlayerManager.Score;
+        }
         questActive = true;
         firstInteraction = false;
 
-        UiManager.DisplayQuestInfo($"collect {itemAmount} trash bags", $"0/{itemAmount}");
+        UiManager.DisplayQuestInfo($"collect {itemAmount} boxs", "");
 
-        timerScript.StartTimer(seconds, "time left");
 
-        if (true)
-        {
-            int health = PlayerManager.GetHealth();
-        }
     }
 
 
@@ -136,6 +146,12 @@ public class startQuest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int health = playerManager.Health;
+        if (health == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        }
         if (questArchieved == false)
         {
             DetectObject();
@@ -143,82 +159,38 @@ public class startQuest : MonoBehaviour
 
         if (questActive == true)
         {
-            UiManager.UpdateQuestProgress($"{PlayerManager.Score - initialScore}/{itemAmount}");
-            if (timerScript.timerComplete == true)
-            {
-                //quest failed
-                string[] failDialogue = new string[]
-                {
-                    "ahh, you ran out of time",
-                    "Don't worry tho. You can always come back when you think you're ready!"
-                };
-                UiManager.TypeDialogue(failDialogue);
-                //manneke zegt da ge altijd opnieuw moogt proberen, en je mag terugkomen wanneer er dankt klaar voor te zijn
-                timerScript.timerComplete = false; //reset timerend not to introduce bugs or something
-                StopQuest();
-            }
-            else if ((PlayerManager.Score - initialScore) == itemAmount)
-            {
-                //quest complete
-                string[] successDialogue = new string[]
-                {
-                    "Great work!, you completed the assignent!",
-                    "The factory entrance is now open, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
-                    "good luck, and thanks for helping"
-                };
-                UiManager.TypeDialogue(successDialogue);
-                questArchieved = true;
-                //display dat quest gelukt is
-                //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
+            UiManager.UpdateQuestProgress($"boxes collect:{PlayerManager.Score - initialScore}");
+            // if (timerScript.timerComplete == true)
+            // {
+            //     //quest failed
+            //     string[] failDialogue = new string[]
+            //     {
+            //         "ahh, you ran out of time",
+            //         "Don't worry tho. You can always come back when you think you're ready!"
+            //     };
+            //     UiManager.TypeDialogue(failDialogue);
+            //     //manneke zegt da ge altijd opnieuw moogt proberen, en je mag terugkomen wanneer er dankt klaar voor te zijn
+            //     timerScript.timerComplete = false; //reset timerend not to introduce bugs or something
+            //     StopQuest();
+            // }
 
-                StopQuest();
-            }
+            // {
+            //     //quest complete
+            //     string[] successDialogue = new string[]
+            //     {
+            //         "Great work!, you completed the assignent!",
+            //         "The factory entrance is now open, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
+            //         "good luck, and thanks for helping"
+            //     };
+            //     UiManager.TypeDialogue(successDialogue);
+            //     questArchieved = true;
+            //     //display dat quest gelukt is
+            //     //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
+
+            //     StopQuest();
+            // }
         }
     }
 
-    // void GenerateEnemies()
-    // {
-    //     Debug.Log(CityMaker.numberOfEnemies);
-    //     for (int i = 0; i < CityMaker.numberOfEnemies; i++)
-    //     {
-    //         if (roadPositions.Count > 0)
-    //         {
-    //             Vector3 enemyPosition;
-    //             do
-    //             {
-    //                 enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
-    //             }
-    //             while (Vector3.Distance(enemyPosition, playerPosition) < 10 && Vector3.Distance(enemyPosition, containerPosition) < 10);
 
-    //             Instantiate(CityMaker.enemyPrefab, enemyPosition, Quaternion.identity);
-    //         }
-    //     }
-    // }
-
-    // void GeneratePickups()
-    // {
-
-    //     for (int i = 0; i < CityMaker.numberOfPickups; i++)
-    //     {
-    //         if (roadPositions.Count > 0)
-    //         {
-    //             Vector3 pickupPosition = roadPositions[Random.Range(0, roadPositions.Count)];
-    //             Quaternion pickupRotation;
-    //             do
-    //             {
-    //                 float offsetX = Random.Range(-4f, 4f);
-    //                 float offsetZ = Random.Range(-4f, 4f);
-    //                 pickupPosition += new Vector3(offsetX, 0.0f, offsetZ);
-
-    //                 float randomYRotation = Random.Range(0f, 360f);
-    //                 pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
-
-    //             }
-    //             while (Vector3.Distance(pickupPosition, playerPosition) < 30 && Vector3.Distance(pickupPosition, containerPosition) < 30);
-
-
-    //             Instantiate(CityMaker.pickupPrefab, pickupPosition, pickupRotation);
-    //         }
-    //     }
-    // }
 }
