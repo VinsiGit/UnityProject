@@ -10309,7 +10309,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: cb8c1c3eca292ca44b64fc58a2a38f31, type: 2}
+      objectReference: {fileID: 2100000, guid: 1fb2854e0c9b8294fb1c650901e5a495, type: 2}
     - target: {fileID: 114197935333194506, guid: 1bd4e0ba5608fab449caf9ead511d662,
         type: 3}
       propertyPath: wheels.Array.data[0].collider
@@ -11154,7 +11154,7 @@ Transform:
   m_GameObject: {fileID: 558379206}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.1, y: 6.84, z: -2.28}
+  m_LocalPosition: {x: 0, y: 4.71, z: 3.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11240,7 +11240,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558379206}
   serializedVersion: 8
-  lengthInSec: 2.56
+  lengthInSec: 20
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -11315,7 +11315,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.69
+      scalar: 20
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -11368,7 +11368,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -11422,7 +11422,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.16981131, g: 0.1285792, b: 0.08875044, a: 0.3254902}
+      maxColor: {r: 0.10565177, g: 0.254717, b: 0.08987184, a: 0.59607846}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -11486,7 +11486,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 7
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -11863,12 +11863,12 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 17
     angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.48
-    donutRadius: 0.2
+    radiusThickness: 0
+    donutRadius: 0.33
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
@@ -11950,7 +11950,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.24
+      value: 1.56
       mode: 0
       spread: 0
       speed:
@@ -12069,7 +12069,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 5
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -47511,7 +47511,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0aea52c52d446494abceafc3d84bf2aa, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.132
   m_Pitch: 1
