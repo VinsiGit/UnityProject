@@ -124,6 +124,95 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &702150324
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5182860836239228796, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: CityMaker
+      value: 
+      objectReference: {fileID: 1073348730}
+    - target: {fileID: 5182860836239228796, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704188723134773599, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542192911900621936, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_Joshua
+      objectReference: {fileID: 0}
+    - target: {fileID: 7542192911900621936, guid: 22902807849e8534ab366903507d078b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22902807849e8534ab366903507d078b, type: 3}
+--- !u!1 &702150325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7542192911900621936, guid: 22902807849e8534ab366903507d078b,
+    type: 3}
+  m_PrefabInstance: {fileID: 702150324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &895901824
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +342,7 @@ GameObject:
   - component: {fileID: 1073348729}
   - component: {fileID: 1073348730}
   - component: {fileID: 1073348731}
+  - component: {fileID: 1073348732}
   m_Layer: 0
   m_Name: city
   m_TagString: Untagged
@@ -295,8 +385,7 @@ MonoBehaviour:
     type: 3}
   intersectionPrefab: {fileID: 2576820526575496265, guid: d88ab4c5240f06640ad1e659cf050e2a,
     type: 3}
-  playerPrefab: {fileID: 7542192911900621936, guid: adb55aa31bd1e4246ae4c9abfa81b052,
-    type: 3}
+  playerPrefab: {fileID: 702150325}
   containerPrefab: {fileID: 8515733072569678923, guid: 965a53e229a8b634499ec7d4b58df56e,
     type: 3}
   wallMaterial: {fileID: 2100000, guid: 2fcc2d7715babc8498961473ab84f83e, type: 2}
@@ -316,6 +405,8 @@ MonoBehaviour:
     type: 3}
   numberOfBirds: 50
   birdHeight: 50
+  questPrefab: {fileID: 7074726297759211880, guid: 5f82614a0076a5645845a6d834e04aa6,
+    type: 3}
 --- !u!114 &1073348731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +438,25 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
+--- !u!114 &1073348732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073348728}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd555d55619ea243840d5b65434faa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerScript: {fileID: 5677008365628386406, guid: 22902807849e8534ab366903507d078b,
+    type: 3}
+  UiManager: {fileID: 1394102315746490498, guid: 22902807849e8534ab366903507d078b,
+    type: 3}
+  CityMaker: {fileID: 1073348730}
+  timeInSeconds: 3
+  itemAmount: 5
 --- !u!1 &1383929874
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,3 +682,4 @@ SceneRoots:
   - {fileID: 1599302889}
   - {fileID: 1383929876}
   - {fileID: 895901827}
+  - {fileID: 702150324}

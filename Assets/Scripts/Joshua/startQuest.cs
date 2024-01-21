@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,19 +9,27 @@ public class startQuest : MonoBehaviour
 
     public GameTimer timerScript;
     public UIManager UiManager;
-    public Animator factoryOpen;
 
-    public int timeInSeconds = 300;
-    public int itemAmount = 10;
+    public CityMaker CityMaker;
+    public int timeInSeconds = 3;
+    public int itemAmount = 5;
 
     private int initialScore;
     private bool firstInteraction = true;
     private bool questActive = false;
     private bool questArchieved = false;
     private Coroutine questCoroutine; // Coroutine reference for interaction text
-    // Start is called before the first frame update
+                                      // Start is called before the first frame update
+
+    private Vector3 playerPosition;
+    private Vector3 containerPosition;
+    List<Vector3> roadPositions = CityMaker.RoadPositions;
+
     void Start()
     {
+        playerPosition = CityMaker.playerPrefab.transform.position;
+        containerPosition = CityMaker.containerPrefab.transform.position; // Assuming 'container' is your container GameObject
+
         PlayIntro();
     }
 
@@ -56,8 +63,6 @@ public class startQuest : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     Transform parentObject = rayHit.transform.parent;
-                    GameObject exclaimationpoint = parentObject.Find("exclaimationpoint").gameObject;
-                    exclaimationpoint.SetActive(false);
                     if (questActive == false)
                     {
                         questCoroutine = StartCoroutine(StartQuest(timeInSeconds));
@@ -102,7 +107,10 @@ public class startQuest : MonoBehaviour
         }
 
         // Wait until the dialogue is finished
-        yield return new WaitUntil(() => true == true); //UiManager.dialogueFinished
+        yield return new WaitUntil(() => UIManager.dialogueFinished); //UiManager.dialogueFinished
+
+        GenerateEnemies();
+        GeneratePickups();
 
         initialScore = PlayerManager.Score;
         questActive = true;
@@ -160,8 +168,52 @@ public class startQuest : MonoBehaviour
                 //display dat quest gelukt is
                 //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
 
-                factoryOpen.SetTrigger("quest complete");
                 StopQuest();
+            }
+        }
+    }
+
+    void GenerateEnemies()
+    {
+        for (int i = 0; i < CityMaker.numberOfEnemies; i++)
+        {
+            if (roadPositions.Count > 0)
+            {
+                Vector3 enemyPosition;
+                do
+                {
+                    enemyPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+                }
+                while (Vector3.Distance(enemyPosition, playerPosition) < 10 && Vector3.Distance(enemyPosition, containerPosition) < 10);
+
+                Instantiate(CityMaker.enemyPrefab, enemyPosition, Quaternion.identity);
+            }
+        }
+    }
+
+    void GeneratePickups()
+    {
+
+        for (int i = 0; i < CityMaker.numberOfPickups; i++)
+        {
+            if (roadPositions.Count > 0)
+            {
+                Vector3 pickupPosition = roadPositions[Random.Range(0, roadPositions.Count)];
+                Quaternion pickupRotation;
+                do
+                {
+                    float offsetX = Random.Range(-4f, 4f);
+                    float offsetZ = Random.Range(-4f, 4f);
+                    pickupPosition += new Vector3(offsetX, 0.0f, offsetZ);
+
+                    float randomYRotation = Random.Range(0f, 360f);
+                    pickupRotation = Quaternion.Euler(0, randomYRotation, 0);
+
+                }
+                while (Vector3.Distance(pickupPosition, playerPosition) < 30 && Vector3.Distance(pickupPosition, containerPosition) < 30);
+
+
+                Instantiate(CityMaker.pickupPrefab, pickupPosition, pickupRotation);
             }
         }
     }
