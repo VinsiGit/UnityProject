@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     private TextMeshProUGUI output_text; // New TextMeshProUGUI for dialogue
     private TextMeshProUGUI next; // New TextMeshProUGUI for dialogue
-    private float dialogueTypingDelay = 0.1f; // Typing speed for interaction text
+    private float dialogueTypingDelay = 0.08f; // Typing speed for interaction text
     private Coroutine dialogueCoroutine; // Coroutine reference for interaction text
 
     // Start is called before the first frame update
@@ -23,14 +23,6 @@ public class UIManager : MonoBehaviour
         dialogueCoroutine = null;
         output_text = dialogueWindow.transform.Find("text").GetComponent<TextMeshProUGUI>();
         next = dialogueWindow.transform.Find("next").GetComponent<TextMeshProUGUI>();
-        string[] dialogueStrings = new string[]
-        {
-                "Hello, welcome to the dialogue!",
-                "This is the second line.",
-                "And here is the third line.",
-                "Press space to continue..."
-        };
-        TypeDialogue(dialogueStrings);
     }
 
     // Update is called once per frame
