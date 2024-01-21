@@ -40,6 +40,14 @@ public class CityMaker : MonoBehaviour
 
     public List<Vector3> RoadPositions { get; internal set; }
 
+
+    void Update()
+    {
+        if (player.transform.position.y < -10) // Change -10 to whatever y-value you consider to be "falling off the map"
+        {
+            player.transform.position = new Vector3(40, 0, 0);
+        }
+    }
     void Start()
     {
         player = playerPrefab;
@@ -60,7 +68,8 @@ public class CityMaker : MonoBehaviour
     }
     void AddEnemy()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Transform player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
 
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
@@ -188,19 +197,18 @@ public class CityMaker : MonoBehaviour
     void GeneratePlayer()
     {
         // Calculate the position next to the city wall
-        Vector3 playerPosition = new Vector3(40, 0, 0);
+        Vector3 playerPosition = new Vector3(30, 0, 0);
 
         // Instantiate the player facing towards the city
-        player.transform.position = playerPosition;
+        player.transform.position = playerPosition + new Vector3(0, 1, 0);
         player.transform.rotation = Quaternion.Euler(0, 90, 0);
-
         // Calculate the position for the container next to the player
-        Vector3 containerPosition = playerPosition + new Vector3(5 * roadFrequencyX, 0, 0);
+        Vector3 containerPosition = playerPosition + new Vector3(5 * roadFrequencyX + 10, 0, 0);
 
         // Instantiate the container
         container = Instantiate(containerPrefab, containerPosition, Quaternion.Euler(0, 90, 0));
 
-        Vector3 questPosition = playerPosition + new Vector3(0, 0, 5);
+        Vector3 questPosition = playerPosition + new Vector3(10, 0, 5);
 
         // Instantiate the container
         Instantiate(questPrefab, questPosition, Quaternion.Euler(0, 90, 0));

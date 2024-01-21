@@ -127,7 +127,7 @@ public class startQuest : MonoBehaviour
         questActive = true;
         firstInteraction = false;
 
-        UiManager.DisplayQuestInfo($"collect {itemAmount} boxs", "");
+        // UiManager.DisplayQuestInfo($"collect {itemAmount} boxs", "");
 
 
     }
