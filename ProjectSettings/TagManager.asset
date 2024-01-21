@@ -8,6 +8,8 @@ TagManager:
   - Container
   - NPC
   - Exit
+  - finish
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - Water
   - UI
   - playerView
-  - 
-  - 
+  - Player
+  - GeneratedObjects
   - 
   - 
   - 
