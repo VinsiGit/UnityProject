@@ -69,11 +69,9 @@ public class startQuest : MonoBehaviour
 
                     if (questActive == false)
                     {
-                        hitObject.tag = "";
                         questCoroutine = StartCoroutine(StartQuest(timeInSeconds));
-                        hitObject.tag = "NPC";
                     }
-                    else
+                    else if ((PlayerManager.Score - initialScore) < itemAmount)
                     {
                         string[] reminder = new string[]
                         {
@@ -149,6 +147,7 @@ public class startQuest : MonoBehaviour
         int health = playerManager.Health;
         if (health == 0)
         {
+            playerManager.addScore(-(PlayerManager.Score - initialScore));
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }

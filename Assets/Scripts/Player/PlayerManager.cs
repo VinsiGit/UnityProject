@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI healthDisplay; // display for player's health
 
     private static int score = 0;
-    private int health = 10; // player's health
+    private int health = 100; // player's health
 
     public static int Score
     {
