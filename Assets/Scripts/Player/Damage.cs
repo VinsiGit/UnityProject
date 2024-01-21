@@ -4,6 +4,7 @@ public class Damage : MonoBehaviour
 {
     private PlayerManager playerManager; // Reference to the PlayerManager
 
+    public int damageAmount = 10;
     public AudioClip damageAudio;
     private float damageTimer = 0; // Timer for damage
     private bool isInvincible = false; // Invincibility status
@@ -29,7 +30,7 @@ public class Damage : MonoBehaviour
 
     void TakeDamage()
     {
-        playerManager.Damage(10); // decrease health by 10
+        playerManager.Damage(damageAmount); // decrease health by 10
         isInvincible = true;
         if (damageAudio != null)
         {
