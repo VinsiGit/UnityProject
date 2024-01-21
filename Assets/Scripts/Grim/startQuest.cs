@@ -11,6 +11,8 @@ public class startQuest : MonoBehaviour
     public GameTimer timerScript;
     public UIManager UiManager;
     public Animator factoryOpen;
+    public AudioSource gate_src;
+    public AudioClip gate_open;
     
     public int timeInSeconds = 300;
     public int itemAmount = 10;
@@ -84,7 +86,7 @@ public class startQuest : MonoBehaviour
             string[] longDialogue = new string[]
             {
                 "Oh hi, i see you're collecting trash",
-                "I could use your help. We had a bit of an oopsie in the factory and now it is littered with radioactive trash. Maybe you can throw them in your radiation-proof garbage truck with built-in homeless shelter™",
+                "I could use your help. We had a bit of an oopsie in the factory and now it is littered with radioactive trash. Maybe you can throw them in your unbranded radiation-proof garbage truck™",
                 "You have to be quick tho, as if you stay inside for too long, the radiation becomes lethal",
                 $"So to prove you are quick enough, you get {timeInSeconds} seconds to deliver {itemAmount} trash bags to the dumpster next to me.",
                 "good luck!"
@@ -153,7 +155,8 @@ public class startQuest : MonoBehaviour
                 {
                     "Great work!, you completed the assignent!",
                     "The factory entrance is now open, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
-                    "good luck, and thanks for helping"
+                    "And if you can't find your truck, just follow the emergency exity signs. They lead to the garage where i'll park your truck",
+                    "good luck, and thanks again for helping"
                 };
                 UiManager.TypeDialogue(successDialogue);
                 questArchieved = true;
@@ -161,6 +164,7 @@ public class startQuest : MonoBehaviour
                 //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
 
                 factoryOpen.SetTrigger("quest complete");
+                gate_src.PlayOneShot(gate_open);
                 StopQuest();
             }
         }
