@@ -58,6 +58,7 @@ public class StateManager : MonoBehaviour
         // Wait for some 2 seconds
         yield return new WaitForSecondsRealtime(2f);
 
+        AudioListener.volume = 0f;
         // stop time
         Time.timeScale = 0;
     }

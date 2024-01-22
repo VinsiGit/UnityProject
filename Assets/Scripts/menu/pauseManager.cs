@@ -15,10 +15,12 @@ public class pauseManager : MonoBehaviour
         {
             if (!paused)
             {
+                AudioListener.volume = 0f;
                 PauseGame();
             }
             else
             {
+                AudioListener.volume = 1f;
                 ResumeGame();
             }
         }
