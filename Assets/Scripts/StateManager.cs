@@ -32,6 +32,7 @@ public class StateManager : MonoBehaviour
         gameUI.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(true);
         Time.timeScale = 0;
+        AudioListener.volume = 0f;
     }
     public void ResumeGame()
     {
@@ -40,6 +41,7 @@ public class StateManager : MonoBehaviour
         gameOverMenu.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(true);
         Time.timeScale = 1;
+        AudioListener.volume = 1f;
     }
 
     public void GameOver()
