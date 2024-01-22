@@ -22,6 +22,7 @@ public class gameOverManager : MonoBehaviour
 
     public void RestartGame()
     {
+        AudioListener.volume = 1f;
         PlayerManager.Score = initialScore;
         stateMan.ResumeGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -30,6 +31,7 @@ public class gameOverManager : MonoBehaviour
 
     public void MainMenu()
     {
+        AudioListener.volume = 1f;
         stateMan.ResumeGame();
         SceneManager.LoadScene(0);
         Cursor.lockState = CursorLockMode.None;
