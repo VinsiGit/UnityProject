@@ -7,7 +7,9 @@ public class ChangeToLevel3 : MonoBehaviour
 {
     // Start is called before the first frame update
     public PlayerManager playerManager;
+    public UIManager UiManager;
     private int initialscore = 0;
+    private int barrelAmount = 7;
     void Start()
     {
         initialscore = PlayerManager.Score;
@@ -16,7 +18,8 @@ public class ChangeToLevel3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerManager.score-initialscore == 3)
+        UiManager.UpdateQuestProgress($"{PlayerManager.Score - initialscore}/{barrelAmount}");
+        if (PlayerManager.score-initialscore == barrelAmount)
         {
             //Dit achteraf veranderen naar level3
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
