@@ -10,8 +10,8 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI healthDisplay; // display for player's health
     public StateManager stateMan;
 
-    private static int score = 0;
-    private int health = 100; // player's health
+    public static int score = 0;
+    public int health = 100; // player's health
 
     public static int Score
     {
