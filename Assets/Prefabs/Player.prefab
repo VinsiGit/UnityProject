@@ -2498,7 +2498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1425124014904399885
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2774,9 +2774,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588b8dd8b4fe5b842a937fbeae31e610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  sprintSpeed: 6
-  jumpSpeed: 3
+  speed: 8
+  sprintSpeed: 10
+  jumpSpeed: 0
   gravity: 10
   mouseSensitivity: 200
   playerCamera: {fileID: 5425146254157744314}
@@ -2864,6 +2864,7 @@ MonoBehaviour:
   goalDisplay: {fileID: 8425580115446804543}
   dialogueWindow: {fileID: 1619205037349006082}
   dialogueFinished: 0
+  dialogueTypingDelay: 0.08
 --- !u!114 &2666111854676689658
 MonoBehaviour:
   m_ObjectHideFlags: 0
