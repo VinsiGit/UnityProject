@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_Barking_Dog/3D Free Modular Kit/Test_Map/LightingData.asset.meta
 guid: 5ccf681a5a6a0d34ba50f7346e31858c
+========
+guid: 24a22f49258d9804a940424f59ed0a71
+>>>>>>>> origin/Joshua:Assets/Materials/Joshua/Building/roof.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 112000000
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

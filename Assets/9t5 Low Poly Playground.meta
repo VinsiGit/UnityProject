@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/9t5 Low Poly Playground.meta
 guid: 7f3dea00afec4c7468a199756d4ee3a3
+========
+guid: f5e2b2ec48a9f594e80f94c72008a9f8
+>>>>>>>> origin/Joshua:Assets/Materials/Joshua/Building.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
