@@ -7,11 +7,12 @@ public class finishManagerScript : MonoBehaviour
 {
 
     public GameObject finishUI;
+    private int initialScore = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        initialScore = PlayerManager.Score;
     }
 
     // Update is called once per frame
@@ -28,6 +29,7 @@ public class finishManagerScript : MonoBehaviour
 
     public void Restart()
     {
+        PlayerManager.Score = initialScore;
         Time.timeScale = 1f;
         AudioListener.volume = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
