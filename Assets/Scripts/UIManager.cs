@@ -10,10 +10,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI progressDisplay;
     public TextMeshProUGUI goalDisplay;
     public GameObject dialogueWindow;
+    public bool dialogueFinished = false;
+    public float dialogueTypingDelay = 0.08f; // Typing speed for interaction text
 
     private TextMeshProUGUI output_text; // New TextMeshProUGUI for dialogue
     private TextMeshProUGUI next; // New TextMeshProUGUI for dialogue
-    private float dialogueTypingDelay = 0.08f; // Typing speed for interaction text
     private Coroutine dialogueCoroutine; // Coroutine reference for interaction text
 
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
     // Public method to call interaction text from the outside
     public void TypeDialogue(string[] texts)
     {
+        dialogueFinished = false;
         next.gameObject.SetActive(false);
         if (dialogueCoroutine != null)
         {
@@ -82,6 +84,7 @@ public class UIManager : MonoBehaviour
         }
 
         // Deactivate the dialogue window after the last string
+        dialogueFinished = true;
         dialogueWindow.gameObject.SetActive(false);
     }
 

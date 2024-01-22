@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreDisplay; // direct reference to textmesh -> change to inventory attribute of playermanager
     public TextMeshProUGUI healthDisplay; // display for player's health
+    public StateManager stateMan;
 
     public static int score = 0;
     public int health = 100; // player's health
@@ -14,11 +16,28 @@ public class PlayerManager : MonoBehaviour
     public static int Score
     {
         get { return score; }
+        set
+        {
+            if (value < 0)
+            {
+                score = 0;
+            }
+            else
+            {
+                score = value;
+            }
+        }
     }
-
+    public int Health
+    {
+        get { return health; }
+    }
     void Start()
     {
-
+        if (SceneManager.GetActiveScene().buildIndex <= 1)
+        {
+            score = 0;
+        }
     }
 
     // Update is called once per frame
@@ -26,7 +45,10 @@ public class PlayerManager : MonoBehaviour
     {
         scoreDisplay.text = $"Score: {score}";
         healthDisplay.text = $"Health: {health}"; // display player's health
-
+        if (health <= 0)
+        {
+            stateMan.GameOver();
+        }
     }
 
     public void addScore(int amount)
@@ -37,9 +59,5 @@ public class PlayerManager : MonoBehaviour
     {
         health -= amount; // decrease player's health by the damage amount
         if (health < 0) health = 0; // prevent health from going below 0
-    }
-    public int GetHealth()
-    {
-        return health;
     }
 }

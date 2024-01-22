@@ -6,6 +6,8 @@ public class weaponSwingOnClick : MonoBehaviour
 {
     private Animator anim;
     public pauseManager pauseMan; // Reference to the PauseManager script or any other script controlling pause state
+    public AudioSource src;
+    public AudioClip whoosh;
 
     void Start()
     {
@@ -18,6 +20,7 @@ public class weaponSwingOnClick : MonoBehaviour
         if (pauseMan != null && !pauseMan.paused && Input.GetMouseButtonDown(0))
         {
             anim.SetTrigger("click");
+            src.PlayOneShot(whoosh);
         }
     }
 }

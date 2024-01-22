@@ -7,6 +7,7 @@ public class StateManager : MonoBehaviour
 {
     public GameObject gameUI;
     public GameObject pauseMenu;
+    public GameObject gameOverMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +32,36 @@ public class StateManager : MonoBehaviour
         gameUI.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(true);
         Time.timeScale = 0;
+        AudioListener.volume = 0f;
     }
     public void ResumeGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
         pauseMenu.gameObject.SetActive(false);
+        gameOverMenu.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(true);
         Time.timeScale = 1;
+        AudioListener.volume = 1f;
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine(GameOverCouroutine());
+    }
+
+    private IEnumerator GameOverCouroutine()
+    {
+        // Slow timescale
+        Time.timeScale = 0.1f;
+        Cursor.lockState = CursorLockMode.None;
+        gameUI.gameObject.SetActive(false);
+        gameOverMenu.gameObject.SetActive(true);
+
+        // Wait for some 2 seconds
+        yield return new WaitForSecondsRealtime(2f);
+
+        AudioListener.volume = 0f;
+        // stop time
+        Time.timeScale = 0;
     }
 }
