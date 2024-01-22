@@ -8,7 +8,7 @@ public class ObjectGenerator : MonoBehaviour
     public GameObject objectPrefab3;
     public int selectedInteger = 0;
     private float timeSinceLastGenerate = 0f;
-    private float generateInterval = 3f;
+    private float generateInterval = 6.5f;
     private bool logicActive = false;
 
     void Update()
