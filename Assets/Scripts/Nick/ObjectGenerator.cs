@@ -6,7 +6,6 @@ public class ObjectGenerator : MonoBehaviour
     public GameObject objectPrefab1;
     public GameObject objectPrefab2;
     public GameObject objectPrefab3;
-    public int selectedInteger = 0;
     private float timeSinceLastGenerate = 0f;
     private float generateInterval = 6.5f;
     private bool logicActive = false;
@@ -21,9 +20,9 @@ public class ObjectGenerator : MonoBehaviour
             {
                 GenerateObject();
                 timeSinceLastGenerate = 0f;
-                selectedInteger -= 1;
+                PlayerManager.Score -= 1;
 
-                if (selectedInteger <= 0)
+                if (PlayerManager.Score <= 0)
                 {
                     stateManager.GameOver();
                 }
@@ -32,10 +31,6 @@ public class ObjectGenerator : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerManager.Score > 0)
-            selectedInteger = PlayerManager.Score;
-        else
-            selectedInteger = 50;
     }
     void GenerateObject()
     {

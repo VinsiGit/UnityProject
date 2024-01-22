@@ -1321,8 +1321,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'score:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2178,7 +2178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3395159638341614515}
   - component: {fileID: 6101172771985781798}
-  - component: {fileID: 6053921355972404661}
+  - component: {fileID: 6752142358339182097}
   m_Layer: 6
   m_Name: weapon
   m_TagString: Untagged
@@ -2223,7 +2223,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6053921355972404661
+--- !u!114 &6752142358339182097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2232,7 +2232,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5043714651869824305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b595b83150ce8443aa7d4bc90435261, type: 3}
+  m_Script: {fileID: 11500000, guid: 293e7bd78ab2d61459b5a6887aa1d60e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMan: {fileID: 1994748005784908603}
@@ -2305,8 +2305,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'health:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3327,9 +3327,9 @@ GameObject:
   - component: {fileID: 1394102315746490498}
   - component: {fileID: 2666111854676689658}
   - component: {fileID: 5136884700738410472}
-  - component: {fileID: 3903481657311164731}
   - component: {fileID: 1994748005784908603}
   - component: {fileID: 2753088718457500799}
+  - component: {fileID: 8247769704456776091}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3452,6 +3452,7 @@ MonoBehaviour:
   scoreDisplay: {fileID: 3282456330008537908}
   healthDisplay: {fileID: 6482406061157296109}
   stateMan: {fileID: 5136884700738410472}
+  health: 100
 --- !u!114 &5677008365628386406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3514,20 +3515,6 @@ MonoBehaviour:
   gameUI: {fileID: 5392117599131079672}
   pauseMenu: {fileID: 443312078537027830}
   gameOverMenu: {fileID: 7785545930738269461}
---- !u!114 &3903481657311164731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7542192911900621936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50b83f0683572d04a9349fd04b691e23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 10
-  damageAudio: {fileID: 0}
 --- !u!114 &1994748005784908603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3555,6 +3542,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMan: {fileID: 5136884700738410472}
+--- !u!114 &8247769704456776091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542192911900621936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1c13d58c657e744a073d6439687e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
+  damageAudio: {fileID: 0}
 --- !u!1 &7785545930738269461
 GameObject:
   m_ObjectHideFlags: 0

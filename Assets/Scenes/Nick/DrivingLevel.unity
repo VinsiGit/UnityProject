@@ -49053,6 +49053,7 @@ MonoBehaviour:
   scoreDisplay: {fileID: 4124926712093614251}
   healthDisplay: {fileID: 1283929786}
   stateMan: {fileID: 4815797651273399084}
+  health: 100
 --- !u!4 &4815797651273399087
 Transform:
   m_ObjectHideFlags: 0
@@ -49426,7 +49427,8 @@ MonoBehaviour:
   stateManager: {fileID: 4815797651273399084}
   objectPrefab1: {fileID: 4085104840524854456, guid: cfed90d0fb643644a99730831421298f,
     type: 3}
-  objectPrefab2: {fileID: 1083486737}
+  objectPrefab2: {fileID: 1786585586655397633, guid: bf8c7c17f8de60b47a3abeb2c3c97c1d,
+    type: 3}
   objectPrefab3: {fileID: 2121458350}
   selectedInteger: 10
 --- !u!33 &4815797651276299021
