@@ -14,7 +14,6 @@ public class startQuest : MonoBehaviour
     public StateManager statemanager;
 
     public CityMaker CityMaker;
-    public int timeInSeconds = 3;
     public int itemAmount = 5;
 
     private int initialScore;
@@ -69,7 +68,7 @@ public class startQuest : MonoBehaviour
 
                     if (questActive == false)
                     {
-                        questCoroutine = StartCoroutine(StartQuest(timeInSeconds));
+                        questCoroutine = StartCoroutine(StartQuest());
                     }
                     else if ((PlayerManager.Score - initialScore) < itemAmount)
                     {
@@ -89,7 +88,7 @@ public class startQuest : MonoBehaviour
         }
     }
 
-    IEnumerator StartQuest(int seconds)
+    IEnumerator StartQuest()
     {
         //optional: spawn 20 extra trash
         if (firstInteraction == true)
@@ -148,7 +147,6 @@ public class startQuest : MonoBehaviour
         if (health == 0)
         {
             playerManager.addScore(-(PlayerManager.Score - initialScore));
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
         if (questArchieved == false)
@@ -159,35 +157,7 @@ public class startQuest : MonoBehaviour
         if (questActive == true)
         {
             UiManager.UpdateQuestProgress($"boxes collect:{PlayerManager.Score - initialScore}");
-            // if (timerScript.timerComplete == true)
-            // {
-            //     //quest failed
-            //     string[] failDialogue = new string[]
-            //     {
-            //         "ahh, you ran out of time",
-            //         "Don't worry tho. You can always come back when you think you're ready!"
-            //     };
-            //     UiManager.TypeDialogue(failDialogue);
-            //     //manneke zegt da ge altijd opnieuw moogt proberen, en je mag terugkomen wanneer er dankt klaar voor te zijn
-            //     timerScript.timerComplete = false; //reset timerend not to introduce bugs or something
-            //     StopQuest();
-            // }
 
-            // {
-            //     //quest complete
-            //     string[] successDialogue = new string[]
-            //     {
-            //         "Great work!, you completed the assignent!",
-            //         "The factory entrance is now open, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
-            //         "good luck, and thanks for helping"
-            //     };
-            //     UiManager.TypeDialogue(successDialogue);
-            //     questArchieved = true;
-            //     //display dat quest gelukt is
-            //     //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
-
-            //     StopQuest();
-            // }
         }
     }
 

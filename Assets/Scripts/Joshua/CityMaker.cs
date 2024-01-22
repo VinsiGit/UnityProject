@@ -28,7 +28,6 @@ public class CityMaker : MonoBehaviour
     public float birdHeight = 50f; // Adjust this as needed
 
     public GameObject questPrefab;
-    private GameObject player; // Assign this in the Unity editor
     private GameObject container;
 
     private List<Vector3> roadPositions = new List<Vector3>();
@@ -43,14 +42,14 @@ public class CityMaker : MonoBehaviour
 
     void Update()
     {
-        if (player.transform.position.y < -10) // Change -10 to whatever y-value you consider to be "falling off the map"
+        if (playerPrefab.transform.position.y < -10) // Change -10 to whatever y-value you consider to be "falling off the map"
         {
-            player.transform.position = new Vector3(40, 0, 0);
+            playerPrefab.transform.position = new Vector3(40, 0, 0);
         }
     }
     void Start()
     {
-        player = playerPrefab;
+        Time.timeScale = 1.0f;
 
         roadPositionsBool = new bool[cityWidth, cityLength];
 
@@ -60,10 +59,9 @@ public class CityMaker : MonoBehaviour
         // GenerateEnemies();
         // GeneratePickups();
         GenerateWalls();
-        GenerateBirds(); // Add this line
+        GenerateBirds();
         // InvokeRepeating("AddEnemy", 10.0f, 10.0f);
 
-        // GenerateMinimapCamera(); // Add this line
 
     }
     void AddEnemy()
@@ -197,11 +195,12 @@ public class CityMaker : MonoBehaviour
     void GeneratePlayer()
     {
         // Calculate the position next to the city wall
+
         Vector3 playerPosition = new Vector3(30, 0, 0);
 
         // Instantiate the player facing towards the city
-        player.transform.position = playerPosition + new Vector3(0, 1, 0);
-        player.transform.rotation = Quaternion.Euler(0, 90, 0);
+        playerPrefab.transform.position = playerPosition + new Vector3(0, 1, 0);
+        playerPrefab.transform.rotation = Quaternion.Euler(0, 90, 0);
         // Calculate the position for the container next to the player
         Vector3 containerPosition = playerPosition + new Vector3(5 * roadFrequencyX + 10, 0, 0);
 
@@ -214,65 +213,10 @@ public class CityMaker : MonoBehaviour
         Instantiate(questPrefab, questPosition, Quaternion.Euler(0, 90, 0));
 
     }
-    // void GeneratePlayer()
-    // {
-    //     if (grassPositions.Count > 0)
-    //     {
-    //         Vector3 playerPosition = grassPositions[Random.Range(0, grassPositions.Count)];
-    //         player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
 
-    //         // Find a suitable position for the container
-    //         Vector3 containerPosition = Vector3.zero;
-    //         for (int i = 0; i < 100; i++) // Try 100 times
-    //         {
-    //             // Generate a random direction
-    //             float xDirection = (Random.value < 0.5f) ? Random.Range(-5f, -2f) : Random.Range(2f, 5f);
-    //             float zDirection = (Random.value < 0.5f) ? Random.Range(-5f, -2f) : Random.Range(2f, 5f);
-    //             Vector3 direction = new Vector3(xDirection, 0, zDirection).normalized;
-    //             // Calculate the container position
-    //             containerPosition = playerPosition + direction * 10;
-
-    //             // Check if the container position is on grass
-    //             if (grassPositions.Contains(containerPosition))
-    //             {
-    //                 // The container position is suitable, exit the loop
-    //                 break;
-    //             }
-    //         }
-
-    //         GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
-    //         container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
-    //     }
-    //     else if (roadPositions.Count > 0)
-    //     {
-    //         Vector3 playerPosition = roadPositions[Random.Range(0, roadPositions.Count)];
-    //         player = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
-
-    //         // Find a suitable position for the container
-    //         Vector3 containerPosition = Vector3.zero;
-    //         for (int i = 0; i < 100; i++) // Try 100 times
-    //         {
-    //             // Generate a random direction
-    //             Vector3 direction = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f)).normalized;
-
-    //             // Calculate the container position
-    //             containerPosition = playerPosition + direction * 5;
-
-    //             // Check if the container position is on a road
-    //             if (roadPositions.Contains(containerPosition))
-    //             {
-    //                 // The container position is suitable, exit the loop
-    //                 break;
-    //             }
-    //         }
-
-    //         GameObject container = Instantiate(containerPrefab, containerPosition, Quaternion.identity);
-    //         container.transform.localScale = new Vector3(1, 1, 1); // Adjust this as needed
-    //     }
-    // }
     public void GenerateEnemies()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Transform player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
@@ -295,7 +239,7 @@ public class CityMaker : MonoBehaviour
 
     public void GeneratePickups()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Transform player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
         Vector3 playerPosition = player.transform.position;
         Vector3 containerPosition = container.transform.position; // Assuming 'container' is your container GameObject
@@ -358,22 +302,6 @@ public class CityMaker : MonoBehaviour
             Instantiate(birdPrefab, birdPosition, Quaternion.identity);
         }
     }
-    // void GenerateMinimapCamera()
-    // {
-    //     // Create a new camera for the minimap
-    //     GameObject minimapCameraObject = new GameObject("MinimapCamera");
-    //     Camera minimapCamera = minimapCameraObject.AddComponent<Camera>();
 
-    //     // Set the camera's viewport rect to make the minimap smaller
-    //     minimapCamera.rect = minimapViewportRect;
-
-    //     // Set the camera's projection to orthographic and adjust its size
-    //     minimapCamera.orthographic = true;
-    //     minimapCamera.orthographicSize = Mathf.Max(cityWidth, cityLength) / 2;
-
-
-    //     // Make the minimap camera a child of the player
-    //     minimapCameraObject.transform.SetParent(player.transform);
-    // }
 }
 
