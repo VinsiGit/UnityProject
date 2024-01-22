@@ -49429,8 +49429,8 @@ MonoBehaviour:
     type: 3}
   objectPrefab2: {fileID: 1786585586655397633, guid: bf8c7c17f8de60b47a3abeb2c3c97c1d,
     type: 3}
-  objectPrefab3: {fileID: 2121458350}
-  selectedInteger: 10
+  objectPrefab3: {fileID: 4492255937167888290, guid: aeb188e376a433c40bf79d2de5b2666b,
+    type: 3}
 --- !u!33 &4815797651276299021
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class TruckUI : MonoBehaviour
 
         string[] dialogueStrings = new string[]
         {
-                "QUICK! FIND THE GARBAGE DISPOSAL FACTORY BEFORE YOU LOSE EVERYTHING!!!"
+                "STUFF IS FALLING OUT OF THE TRUCK! QUICK, FIND THE GARBAGE DISPOSAL FACTORY BEFORE YOU LOSE EVERYTHING!!!"
         };
         TypeDialogue(dialogueStrings);
     }
