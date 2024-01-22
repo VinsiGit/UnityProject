@@ -8,6 +8,7 @@ public class time : MonoBehaviour
 {
     public GameTimer timescript;
     public int timer = 500;
+    public StateManager state;
 
 
 
@@ -25,24 +26,10 @@ public class time : MonoBehaviour
         if (timescript.timerComplete == true)
         {
             Debug.Log("Dood"); // Veranderd naar echt dood gaan
-            StartCoroutine(RestartLevelWithDelay(5f)); // Start de coroutine om het level na 5 seconden te herstarten
+            state.GameOver();
             timescript.timerComplete = false;
         }
     }
 
-    IEnumerator RestartLevelWithDelay(float delayTime)
-    {
-        // Vertraag de tijd
-        Time.timeScale = 0.1f;
-        // Wacht voor de opgegeven vertraging
-        yield return new WaitForSecondsRealtime(delayTime);
-
-
-
-        // Herstel de tijd naar normaal
-        Time.timeScale = 1f;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 
 }
