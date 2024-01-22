@@ -60,4 +60,5 @@ public class PlayerManager : MonoBehaviour
         health -= amount; // decrease player's health by the damage amount
         if (health < 0) health = 0; // prevent health from going below 0
     }
+
 }

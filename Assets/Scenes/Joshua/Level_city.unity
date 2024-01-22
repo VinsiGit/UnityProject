@@ -720,6 +720,11 @@ PrefabInstance:
       propertyPath: damageAudio
       value: 
       objectReference: {fileID: 8300000, guid: fa66a043eb39746439a8a6248eebb4a3, type: 3}
+    - target: {fileID: 8247769704456776091, guid: d417a09e68ab74a49ad987c76f093192,
+        type: 3}
+      propertyPath: damageAmount
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
