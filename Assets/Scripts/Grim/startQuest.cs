@@ -21,11 +21,11 @@ public class startQuest : MonoBehaviour
     private bool firstInteraction = true;
     private bool questActive = false;
     private bool questArchieved = false;
+    private bool start = true;
     private Coroutine questCoroutine; // Coroutine reference for interaction text
     // Start is called before the first frame update
     void Start()
     {
-        PlayIntro();
     }
 
     void PlayIntro()
@@ -127,6 +127,12 @@ public class startQuest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (start == true)
+        {
+            PlayIntro();
+            start = false;
+        }
+
         if(questArchieved == false)
         {
             DetectObject();
