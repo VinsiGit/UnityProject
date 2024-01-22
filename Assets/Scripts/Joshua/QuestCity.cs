@@ -30,6 +30,7 @@ public class QuestCity : MonoBehaviour
 
     void Start()
     {
+        initialScore = PlayerManager.Score;
         roadPositions = CityMaker.RoadPositions;
 
         playerPosition = CityMaker.playerPrefab.transform.position;
