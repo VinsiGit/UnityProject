@@ -22,6 +22,7 @@ public class finishManagerScript : MonoBehaviour
 
     public void Finished()
     {
+        Cursor.lockState = CursorLockMode.None;
         finishUI.SetActive(true);
     }
 
