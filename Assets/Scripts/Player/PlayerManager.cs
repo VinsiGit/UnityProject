@@ -16,7 +16,10 @@ public class PlayerManager : MonoBehaviour
     {
         get { return score; }
     }
-
+    public int Health
+    {
+        get { return health; }
+    }
     void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex <= 1)
@@ -41,9 +44,5 @@ public class PlayerManager : MonoBehaviour
     {
         health -= amount; // decrease player's health by the damage amount
         if (health < 0) health = 0; // prevent health from going below 0
-    }
-    public int GetHealth()
-    {
-        return health;
     }
 }
