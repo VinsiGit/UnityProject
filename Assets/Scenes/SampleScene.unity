@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToPlace: {fileID: 1178835773}
-  numberOfObjects: 50
+  numberOfObjects: 200
 --- !u!154 &151147296
 TerrainCollider:
   m_ObjectHideFlags: 0
