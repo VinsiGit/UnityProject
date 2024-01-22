@@ -13,6 +13,7 @@ public class gameOverManager : MonoBehaviour
     void Start()
     {
         Debug.Log("game over initialised");
+        AudioListener.volume = 1f;
         initialScore = PlayerManager.Score;
     }
 
@@ -22,19 +23,19 @@ public class gameOverManager : MonoBehaviour
 
     public void RestartGame()
     {
-        AudioListener.volume = 1f;
         PlayerManager.Score = initialScore;
         stateMan.ResumeGame();
+        AudioListener.volume = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void MainMenu()
     {
-        AudioListener.volume = 1f;
         stateMan.ResumeGame();
         SceneManager.LoadScene(0);
         Cursor.lockState = CursorLockMode.None;
+        AudioListener.volume = 1f;
     }
 
     public void Quit()

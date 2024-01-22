@@ -29,12 +29,14 @@ public class finishManagerScript : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
+        AudioListener.volume = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void mainMenu()
     {
         Time.timeScale = 1f;
+        AudioListener.volume = 1f;
         SceneManager.LoadScene("starting_menu");
     }
 

@@ -8,7 +8,9 @@ public class pauseManager : MonoBehaviour
     public StateManager stateMan;
 
     public bool paused = false;
-    
+
+    private int initialScore = 0;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -26,11 +28,25 @@ public class pauseManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        initialScore = PlayerManager.Score;
+    }
+
     void PauseGame()
     {
         paused = true;
         Cursor.lockState = CursorLockMode.None;
         stateMan.PauseGame();
+    }
+
+    public void RestartGame()
+    {
+        AudioListener.volume = 1f;
+        PlayerManager.Score = initialScore;
+        stateMan.ResumeGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ResumeGame()

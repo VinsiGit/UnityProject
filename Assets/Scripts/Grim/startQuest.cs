@@ -68,7 +68,7 @@ public class startQuest : MonoBehaviour
                     {
                         string[] reminder = new string[]
                         {
-                            "Bring me 10 trashbags before the time runs out"
+                            "Bring me 10 trashbags before the time runs out and throw them in the container next to me."
                         };
                         UiManager.TypeDialogue(reminder);
                     }

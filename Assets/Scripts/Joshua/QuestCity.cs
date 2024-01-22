@@ -66,7 +66,9 @@ public class QuestCity : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-
+                    Transform parentObject = rayHit.transform.parent;
+                    GameObject exclaimationpoint = parentObject.Find("exclaimationpoint").gameObject;
+                    exclaimationpoint.SetActive(false);
                     if (questActive == false)
                     {
                         questCoroutine = StartCoroutine(StartQuest());

@@ -12,7 +12,6 @@ public class StateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -59,8 +58,8 @@ public class StateManager : MonoBehaviour
 
         // Wait for some 2 seconds
         yield return new WaitForSecondsRealtime(2f);
-
         AudioListener.volume = 0f;
+
         // stop time
         Time.timeScale = 0;
     }
