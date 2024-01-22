@@ -24,8 +24,7 @@ public class time : MonoBehaviour
     {
         if (timescript.timerComplete == true)
         {
-            // Debug.Log("Dood"); // Veranderd naar echt dood gaan
-
+            Debug.Log("Dood"); // Veranderd naar echt dood gaan
             StartCoroutine(RestartLevelWithDelay(5f)); // Start de coroutine om het level na 5 seconden te herstarten
             timescript.timerComplete = false;
         }

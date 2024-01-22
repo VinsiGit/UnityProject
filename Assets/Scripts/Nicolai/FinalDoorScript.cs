@@ -7,6 +7,7 @@ public class FinalDoorScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform doorTransform;  // Reference to the transform of the door object
+    public Transform Sign;
     public PlayerManager playerManager;
     void Start()
     {
@@ -17,9 +18,10 @@ public class FinalDoorScript : MonoBehaviour
     void Update()
     {
 
-        if (PlayerManager.score == 10)
+        if (PlayerManager.score == 6)
         {
             Destroy(doorTransform.gameObject);
+            Destroy(Sign.gameObject);
         }
     }
 }
