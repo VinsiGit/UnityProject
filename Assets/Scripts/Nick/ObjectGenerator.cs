@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class ObjectGenerator : MonoBehaviour
 {
+    public StateManager stateManager;
     public GameObject objectPrefab1;
     public GameObject objectPrefab2;
     public GameObject objectPrefab3;
-    public int selectedInteger = 10;
+    public int selectedInteger = 0;
     private float timeSinceLastGenerate = 0f;
     private float generateInterval = 3f;
     private bool logicActive = false;
@@ -24,11 +25,18 @@ public class ObjectGenerator : MonoBehaviour
 
                 if (selectedInteger <= 0)
                 {
-                    Debug.Log("Selected integer reached zero or less. Do something else here.");
+                    stateManager.GameOver();
                 }
             }
     }
 
+    private void Start()
+    {
+        if (PlayerManager.Score > 0)
+            selectedInteger = PlayerManager.Score;
+        else
+            selectedInteger = 50;
+    }
     void GenerateObject()
     {
         Vector3 playerPosition = transform.position;

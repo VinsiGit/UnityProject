@@ -4,6 +4,7 @@ public class PanelActivation : MonoBehaviour
 {
     public GameObject selectedCanvas;
     public finishManagerScript finishManager;
+    private AudioListener audioListener;
 
     void OnTriggerEnter(Collider other)
     {
@@ -13,7 +14,7 @@ public class PanelActivation : MonoBehaviour
             // Enable the selected panel
             if (selectedCanvas != null)
             {
-                
+                AudioListener.volume = 0f;
                 selectedCanvas.SetActive(false);
                 Invoke("ActivatePanel", 1);
                 
