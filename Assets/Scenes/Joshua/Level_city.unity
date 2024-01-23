@@ -640,10 +640,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1052177433117973732, guid: d417a09e68ab74a49ad987c76f093192,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1394102315746490498, guid: d417a09e68ab74a49ad987c76f093192,
         type: 3}
       propertyPath: dialogueTypingDelay
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335076917305605429, guid: d417a09e68ab74a49ad987c76f093192,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3903481657311164731, guid: d417a09e68ab74a49ad987c76f093192,
         type: 3}
