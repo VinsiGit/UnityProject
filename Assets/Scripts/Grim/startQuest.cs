@@ -23,6 +23,8 @@ public class startQuest : MonoBehaviour
     private bool questArchieved = false;
     private bool start = true;
     private Coroutine questCoroutine; // Coroutine reference for interaction text
+    bool isQuestCompleteDialoguedisplayed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +70,7 @@ public class startQuest : MonoBehaviour
                     {
                         string[] reminder = new string[]
                         {
-                            "Bring me 10 trashbags before the time runs out and throw them in the container next to me."
+                            "Bring me 10 trashbags before the time runs out and throw them in the dumpster next to me."
                         };
                         UiManager.TypeDialogue(reminder);
                     }
@@ -115,7 +117,13 @@ public class startQuest : MonoBehaviour
         timerScript.StartTimer(seconds, "time left");
     }
 
+    IEnumerator OpenFactoryGateAfterDelay()
+    {
+        yield return new WaitUntil(() => UiManager.dialogueFinished == true);
 
+        factoryOpen.SetTrigger("quest complete");
+        gate_src.PlayOneShot(gate_open);
+    }
 
     void StopQuest()
     {
@@ -157,21 +165,23 @@ public class startQuest : MonoBehaviour
             else if ((PlayerManager.Score - initialScore) == itemAmount)
             {
                 //quest complete
-                string[] successDialogue = new string[]
+                if (!isQuestCompleteDialoguedisplayed)
                 {
-                    "Great work!, you completed the assignment!",
-                    "The factory entrance is now open, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
-                    "The radioactive trash is also quite spread out, so you'll have to really search for them!",
-                    "And if you can't find your truck, just follow the emergency exit signs. They lead to the garage where i'll park your truck.",
-                    "good luck, and thanks again for the help!"
-                };
-                UiManager.TypeDialogue(successDialogue);
-                questArchieved = true;
-                //display dat quest gelukt is
-                //beetje meer conversatie en manneke zegt dat poort open gaat, en wenst good luck
+                    string[] successDialogue = new string[]
+                    {
+                        "Great work!, you completed the assignment!",
+                        "I'll open the gate for you, so you can enter whenever you wish. Once you're inside, remember to be quick, because, you know, radiation and stuff...",
+                        "The radioactive trash is also quite spread out, so you'll have to really search for them!",
+                        "And if you can't find your truck, just follow the emergency exit signs. They lead to the garage where i'll park your truck.",
+                        "The factory entrance will now open. Good luck, and thanks again for the help!"
+                    };
+                    UiManager.TypeDialogue(successDialogue);
+                    isQuestCompleteDialoguedisplayed = true;
 
-                factoryOpen.SetTrigger("quest complete");
-                gate_src.PlayOneShot(gate_open);
+                    // Start opening the gate after the dialogue has finished
+                    StartCoroutine(OpenFactoryGateAfterDelay());
+                }
+                questArchieved = true;
                 StopQuest();
             }
         }
